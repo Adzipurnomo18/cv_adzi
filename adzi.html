@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio |  A D Z I</title>
+
+  <!-- Font Awesome untuk Icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!-- AOS Animation -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <!-- Lightbox2 CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet" />
+  <!-- Lightbox2 JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
+  <script>
+function openModal(id) {
+  document.getElementById(id).style.display = "block";
+}
+
+function closeModal(id) {
+  document.getElementById(id).style.display = "none";
+}
+
+// biar bisa klik di luar modal untuk close
+window.onclick = function(event) {
+  let modal = document.getElementById("modalPortfolio");
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const items = document.querySelectorAll(".timeline-item");
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+        }
+      });
+    }, { threshold: 0.2 });
+
+    items.forEach(item => observer.observe(item));
+  });
+</script>
+
+
+<script>
+function zoomImage(src) {
+  document.getElementById("zoomedImage").src = src;
+  document.getElementById("zoomModal").style.display = "flex";
+}
+
+function closeZoom() {
+  document.getElementById("zoomModal").style.display = "none";
+}
+</script>
+<!-- Modal Zoom Universal -->
+<div id="zoomModal" class="zoom-modal" onclick="closeZoom()">
+  <span class="close" onclick="closeZoom()">&times;</span>
+  <div class="zoom-content">
+    <img id="zoomedImage" src="" />
+    <iframe id="zoomedVideo" src="" frameborder="0" allowfullscreen></iframe>
+  </div>
+</div>
+
+<script>
+function zoomImage(src) {
+  document.getElementById("zoomModal").style.display = "block";
+  document.getElementById("zoomedImage").style.display = "block";
+  document.getElementById("zoomedVideo").style.display = "none";
+  document.getElementById("zoomedImage").src = src;
+}
+
+function zoomVideo(youtubeUrl) {
+  document.getElementById("zoomModal").style.display = "block";
+  document.getElementById("zoomedImage").style.display = "none";
+  document.getElementById("zoomedVideo").style.display = "block";
+
+  // Convert short youtu.be link → embed
+  let embedUrl = youtubeUrl.replace("youtu.be/", "www.youtube.com/embed/").split("?")[0];
+  document.getElementById("zoomedVideo").src = embedUrl;
+}
+
+function closeZoom() {
+  document.getElementById("zoomModal").style.display = "none";
+  document.getElementById("zoomedImage").src = "";
+  document.getElementById("zoomedVideo").src = "";
+}
+</script>
+
+<style>
+/* ======== MOBILE RESPONSIVE ======== */
+@media screen and (max-width: 768px) {
+  /* Section padding biar tidak mepet */
+  section {
+    padding: 40px 15px;
+    text-align: center;
+  }
+
+  /* Judul (About, Experience, dst) */
+  h1 {
+    font-size: 26px;
+    font-weight: bold;
+  }
+
+  h2 {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  p {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* About section (foto + teks jadi vertikal) */
+  .about-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .about-container img {
+    max-width: 180px;
+    margin-bottom: 20px;
+  }
+
+  /* Experience / Projects card */
+  .projects-container, .experience-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .project-card, .experience-card {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  /* Skills jadi grid 2 kolom */
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  .skill-card {
+    padding: 15px;
+  }
+
+  /* Education timeline biar full */
+  .timeline {
+    padding: 0;
+  }
+
+  .timeline-item {
+    width: 100%;
+    margin: 20px 0;
+  }
+
+  .timeline-content {
+    text-align: left;
+    padding: 15px;
+  }
+}
+
+/* ======== EXTRA SMALL (HP < 480px) ======== */
+@media screen and (max-width: 480px) {
+  h1 {
+    font-size: 22px;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr; /* jadi 1 kolom */
+  }
+}
+
+  
+.zoom-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.8);
+  justify-content: center;
+  align-items: center;
+}
+.zoom-content {
+  max-width: 90%;
+  max-height: 90%;
+}
+.zoom-content img, 
+.zoom-content iframe {
+  max-width: 100%;
+  max-height: 80vh;
+  display: block;
+  margin: auto;
+}
+.close {
+  position: absolute;
+  top: 15px; right: 20px;
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
+}
+</style>
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+   body {
+  font-family: Arial, sans-serif;
+  color: #e2e8f0;
+  scroll-behavior: smooth;
+
+  /* Ganti warna jadi gambar */
+  background-image: url("https://cdn.pixabay.com/photo/2016/03/26/13/09/workspace-1280538_1280.jpg");
+  background-size: cover;      /* biar full layar */
+  background-position: center; /* posisi tengah */
+  background-attachment: fixed;/* efek parallax (opsional) */
+}
+  /* Modal umum */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    justify-content: center; /* center horizontal */
+    align-items: center;     /* center vertical */
+  }
+
+  /* Konten gambar/video di modal */
+  .modal-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+    max-width: 90%;
+    max-height: 80%;
+    margin: auto;
+    overflow-y: auto;
+    padding: 20px;
+    background: #111;
+    border-radius: 10px;
+  }
+
+  /* Gambar di modal */
+  .modal-content img {
+    max-width: 100%;
+    max-height: 400px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: transform 0.3s;
+  }
+
+  .modal-content img:hover {
+    transform: scale(1.05);
+  }
+
+  /* Video YouTube di modal */
+  .modal-content iframe {
+    width: 80%;
+    height: 450px;
+    border: none;
+    border-radius: 10px;
+  }
+
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(15, 23, 42, 0.9);
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      padding: 15px;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+    }
+    header a {
+      color: #38bdf8;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    header a:hover { color: #facc15; }
+
+    section {
+      min-height: 100vh;
+      padding: 80px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    h1, h2 {
+    color: #38bdf8;
+    margin-bottom: 18px;
+    font-weight: bold;      /* Membuat tulisan tebal */
+    }
+
+    /* Atur ukuran berbeda untuk h1 dan h2 */
+    h1 {
+      font-size: 50px;        /* Bisa diganti sesuai kebutuhan */
+    }
+
+    h2 {
+      font-size: 26px;        /* Bisa diganti sesuai kebutuhan */
+    }
+
+
+    p {
+      max-width: 700px;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      background: linear-gradient(45deg, #38bdf8, #facc15);
+      color: #0f172a;
+      border-radius: 12px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: 0.3s;
+      margin-top: 10px;
+    }
+    .btn:hover { transform: scale(1.05); }
+
+    .stats {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 20px;
+    }
+    .stat-box {
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 12px;
+      min-width: 120px;
+      box-shadow: 0 0 15px rgba(56,189,248,0.2);
+    }
+    .stat-box h3 { font-size: 26px; color: #facc15; }
+
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap; /* Supaya bisa turun kalau kepanjangan */
+      justify-content: center; /* Biar rata tengah */
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .skill-card {
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 12px;
+      transition: 0.3s;
+      text-align: center;
+      min-width: 120px; /* supaya ukurannya konsisten */
+    }
+
+    .skill-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 15px rgba(250,204,21,0.3);
+    }
+    .skill-card i {
+      font-size: 28px;
+      margin-bottom: 10px;
+      color: #38bdf8;
+    }
+    .profile-pic {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;  /* bikin bulat */
+      object-fit: cover;   /* biar proporsional */
+      border: 4px solid #38bdf8;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+    #about {
+      text-align: center;  
+    }
+    #about p {
+      max-width: 800px; /* biar nggak terlalu panjang */
+      margin: 0 auto;   /* posisi ke tengah */
+      line-height: 1.6; /* biar enak dibaca */
+    }
+
+    footer {
+      padding: 30px;
+      text-align: center;
+      background: #1e293b;
+      color: #94a3b8;
+      margin-top: 50px;
+    }
+    footer p {
+      text-align: center;   /* pastikan teks rata tengah */
+      margin: 0 auto;       /* biar posisi benar2 ke tengah */
+      display: block;       /* pastikan sebagai block element */
+      width: 100%;          /* isi lebar penuh */
+      font-size: 14px;
+      font-weight: 500;     /* agak tebal biar jelas */
+    }
+
+    #experience {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    #experience h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #38bdf8;
+    }
+
+    #experience p {
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    #experience ul {
+      text-align: left;
+      line-height: 1.6;
+      margin: 0 auto;
+      max-width: 800px;
+    }
+    #projects {
+    padding: 60px 20px;
+    text-align: center;
+    color: #fff;
+    }
+
+    #projects h2 {
+      font-size: 2rem;
+      color: #38bdf8;
+      margin-bottom: 40px;
+    }
+
+    .projects-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .project-card {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+    }
+
+    .project-card h3 {
+      color: #38bdf8;
+      margin-bottom: 10px;
+    }
+
+    .project-card p {
+      font-size: 0.95rem;
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+
+    .project-card .btn {
+      display: inline-block;
+      padding: 8px 16px;
+      background: #38bdf8;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background 0.3s ease;
+    }
+
+    .project-card .btn:hover {
+      background: #0284c7;
+    }
+
+    .modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.8);
+}
+
+.modal-content {
+  margin: 5% auto;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 80%;
+}
+
+.modal-content img {
+  max-width: 300px;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+.modal-content img:hover {
+  transform: scale(1.05);
+}
+
+.close {
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  color: #fff;
+  font-size: 35px;
+  font-weight: bold;
+  cursor: pointer;
+}
+/* Zoom Modal */
+.zoom-modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.9);
+  justify-content: center;
+  align-items: center;
+}
+
+.zoom-modal img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(255,255,255,0.3);
+  animation: zoomIn 0.3s ease;
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.7); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+    /* Animasi zoom in */
+    @keyframes zoomIn {
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .socials a {
+      color: #38bdf8;
+      margin: 0 10px;
+      font-size: 22px;
+      transition: 0.3s;
+    }
+#education {
+  padding: 100px 20px;
+  text-align: center;
+}
+
+#education h2 {
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 40px;
+  color: #00bfff;
+  position: relative;
+}
+
+/* Animasi */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-80px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(80px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Timeline item default (sembunyi dulu) */
+.timeline-item {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease;
+}
+
+/* Saat aktif (muncul) */
+.timeline-item.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+.timeline {
+  position: relative;
+  max-width: 800px;
+  margin: auto;
+}
+
+.timeline::after {
+  content: '';
+  position: absolute;
+  width: 3px;
+  background: #00bfff;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  margin-left: -1.5px;
+}
+
+.timeline-item {
+  padding: 20px;
+  position: relative;
+  width: 50%;
+}
+
+.timeline-item:nth-child(odd) {
+  left: 0;
+}
+
+.timeline-item:nth-child(even) {
+  left: 50%;
+}
+
+.timeline-content {
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  backdrop-filter: blur(6px);
+  color: #fff;
+  text-align: left;
+}
+
+.timeline-content h3 {
+  margin-top: 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.timeline-content .edu-year {
+  font-size: 14px;
+  color: #ccc;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  top: 20px;
+  right: -10px;
+  width: 20px;
+  height: 20px;
+  background: #00bfff;
+  border-radius: 50%;
+  border: 3px solid #fff;
+}
+
+.timeline-item:nth-child(even)::before {
+  left: -10px;
+}
+
+
+    
+    .socials a:hover { color: #facc15; }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <header>
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#education">Education</a>
+  </header>
+
+<!-- Hero -->
+<section id="hero">
+  <img src="https://cdn.pixabay.com/photo/2025/09/16/02/45/02-45-29-322_1280.png" alt="Foto Profil" class="profile-pic">
+  <h1>Adzi Purnomo</h1>
+  <h3>Technician | Web Developer | IT Staff</h3>
+  <a href="#projects" class="btn">Explore My Work</a>
+</section>
+
+  <!-- About -->
+<section id="about">
+  <h2 data-aos="fade-up">About Me</h2>
+  <p data-aos="fade-up" data-aos-delay="200">
+    Lulusan S1 Teknik Informatika dengan IPK 3.78, memiliki latar belakang sebagai teknisi 
+    elektronik konsumen di PT SITCOMTARA sejak 2017. Terbiasa melakukan troubleshooting 
+    perangkat, analisis teknis, dan edukasi pelanggan secara profesional. Berpengalaman 
+    mengembangkan solusi berbasis teknologi seperti IoT (Internet of Things) dan pemrograman 
+    sistem berbasis web. Menguasai bahasa pemrograman seperti JavaScript, Python, PHP, serta 
+    penggunaan database MySQL. Terbiasa menggunakan sistem operasi Linux/Ubuntu dan memiliki 
+    passion besar dalam dunia pemrograman serta pengembangan perangkat lunak. Siap berkembang 
+    bersama tim developer profesional.
+  </p>
+    <div class="stats" data-aos="fade-up" data-aos-delay="400">
+      <div class="stat-box">
+        <h3>8+</h3>
+        <p>Years Experience</p>
+      </div>
+      <div class="stat-box">
+        <h3>11</h3>
+        <p>Technologies Mastered</p>
+      </div>
+      <div class="stat-box">
+        <h3>100%</h3>
+        <p>Project Success</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+<section id="experience">
+  <h2 data-aos="fade-right">Experience</h2>
+  <p data-aos="fade-up">
+    - Teknisi CE (Consumer Electronics) di PT SITCOMTARA (2017 - 2025)
+  </p>
+  <ul data-aos="fade-up" data-aos-delay="200">
+    <li>
+      Melakukan diagnosa dan perbaikan lebih dari 500 perangkat elektronik konsumen
+      dengan tingkat keberhasilan 98% pada kunjungan pertama.
+    </li>
+    <li>
+      Melakukan instalasi, konfigurasi, serta edukasi teknis kepada lebih dari
+      200 pelanggan mengenai penggunaan dan perawatan produk.
+    </li>
+    <li>
+      Berhasil meningkatkan efisiensi diagnosa awal hingga 90% melalui analisis
+      pola kerusakan perangkat dan riwayat pelanggan.
+    </li>
+    <li>
+      Berkontribusi dalam peningkatan kualitas layanan teknis, selaras dengan SOP
+      perusahaan dan standar layanan pelanggan Samsung.
+    </li>
+  </ul>
+</section>
+
+
+<!-- Projects -->
+<section id="projects">
+  <h2 data-aos="fade-up">Projects</h2>
+  <div class="projects-container">
+
+    <!-- Project 1 -->
+    <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+      <h3>Website Portfolio</h3>
+      <p>
+        Saya menawarkan layanan pengembangan website mulai dari desain hingga implementasi. 
+        Mampu membuat website responsif dan interaktif menggunakan teknologi terbaru seperti HTML, CSS, 
+        JavaScript, dan PHP. Cocok untuk perusahaan yang membutuhkan kehadiran online atau individu yang 
+        ingin membangun portofolio pribadi.
+      </p>
+
+      <!-- Tombol -->
+      <button class="btn" onclick="openModal('modalPortfolio1')">Lihat Screenshot</button>
+    </div>
+
+    <!-- Modal Project 1 -->
+    <div id="modalPortfolio1" class="modal">
+      <div id="zoomModal1" class="zoom-modal" onclick="closeZoom()">
+        <img id="zoomedImage1" src="">
+      </div>
+      <span class="close" onclick="closeModal('modalPortfolio1')">&times;</span>
+      <div class="modal-content">
+        <img src="https://cdn.pixabay.com/photo/2025/09/16/04/31/service-9836993_1280.png" onclick="zoomImage(this.src)" />
+        <img src="https://cdn.pixabay.com/photo/2024/11/30/04/27/app-9234005_1280.png" onclick="zoomImage(this.src)" />
+        <img src="https://cdn.pixabay.com/photo/2024/11/30/05/00/database-9234032_1280.png" onclick="zoomImage(this.src)" />
+        
+      </div>
+    </div>
+
+    <!-- Project 2 -->
+    <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+      <h3>Graphic Design Project</h3>
+      <p>
+        Saya memiliki pengalaman dalam desain grafis, mulai dari pembuatan logo, banner, 
+        hingga desain visual untuk keperluan media sosial. Menggunakan alat seperti Adobe Photoshop, 
+        Figma, dan Canva untuk menghasilkan desain berkualitas tinggi yang sesuai dengan kebutuhan klien.
+      </p>
+
+      <!-- Tombol -->
+      <button class="btn" onclick="openModal('modalPortfolio2')">Lihat Screenshot</button>
+    </div>
+
+    <!-- Modal Project 2 -->
+    <div id="modalPortfolio2" class="modal">
+      <div id="zoomModal2" class="zoom-modal" onclick="closeZoom()">
+        <img id="zoomedImage2" src="">
+      </div>
+      <span class="close" onclick="closeModal('modalPortfolio2')">&times;</span>
+      <div class="modal-content">
+        <img src="https://cdn.pixabay.com/photo/2024/11/30/04/28/design-9234006_960_720.png" onclick="zoomImage(this.src)" />
+        <img src="https://cdn.pixabay.com/photo/2025/09/16/02/40/figma-9836904_1280.png" onclick="zoomImage(this.src)" />
+        <img src="https://cdn.pixabay.com/photo/2025/09/16/04/47/04-47-34-960_1280.png" onclick="zoomImage(this.src)" />
+        <img src="https://cdn.pixabay.com/photo/2025/09/16/04/49/04-49-43-584_1280.png" onclick="zoomImage(this.src)" />
+      </div>
+    </div>
+
+    <!-- Project 3 -->
+   <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+      <h3>Mobile App Development</h3>
+      <p>
+       Aplikasi mobile yang dirancang untuk memudahkan pengguna dalam melakukan manajemen tugas. 
+       Aplikasi ini dibangun menggunakan Flutter dan Firebase untuk backend.
+      </p>
+
+      <!-- Tombol -->
+      <button class="btn" onclick="openModal('modalPortfolio3')">Lihat Screenshot</button>
+    </div>
+
+    <!-- Modal Project 3 -->
+    <div id="modalPortfolio3" class="modal">
+      <div id="zoomModal3" class="zoom-modal" onclick="closeZoom()">
+        <img id="zoomedImage3" src="">
+      </div>
+      <span class="close" onclick="closeModal('modalPortfolio3')">&times;</span>
+      <div class="modal-content">
+        <img src="https://cdn.pixabay.com/photo/2024/11/30/04/23/web-9234002_1280.png" onclick="zoomImage(this.src)" />
+        <img src="https://cdn.pixabay.com/photo/2024/11/30/04/47/web-9234021_1280.png" onclick="zoomImage(this.src)" />
+        <img src="https://cdn.pixabay.com/photo/2024/11/30/04/46/app-9234020_1280.png" onclick="zoomImage(this.src)" />
+        
+      </div>
+    </div>
+
+    <!-- Project 4 -->
+  <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+      <h3>Video Editing Portfolio</h3>
+      <p>
+       Beberapa proyek video editing untuk media sosial dan presentasi. 
+       Diedit menggunakan software CapCut dan KineMaster dengan efek visual dan transisi yang menarik.
+      </p>
+
+      <!-- Tombol -->
+     <button class="btn" onclick="zoomVideo('https://youtu.be/dVN2JlRGd7k?si=e18ld6nPfDKZY_xj')">
+  Lihat Video
+</button>
+
+    <!-- Modal Project 4 -->
+    <div id="modalPortfolio4" class="modal">
+      <div id="zoomModal4" class="zoom-modal" onclick="closeZoom()">
+        <img id="zoomedImage4" src="">
+      </div>
+      <span class="close" onclick="closeModal('modalPortfolio4')">&times;</span>
+      <div class="modal-content">
+        
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+  <!-- Skills -->
+  <section id="skills">
+    <h2 data-aos="fade-right">Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-card" data-aos="zoom-in"><i class="fa-brands fa-html5"></i><p>HTML</p></div>
+      <div class="skill-card" data-aos="zoom-in"><i class="fa-brands fa-css3-alt"></i><p>CSS</p></div>
+      <div class="skill-card" data-aos="zoom-in"><i class="fa-brands fa-js"></i><p>JavaScript</p></div>
+      <div class="skill-card" data-aos="zoom-in"><i class="fa-brands fa-php"></i><p>PHP</p></div>
+      <div class="skill-card" data-aos="zoom-in"><i class="fa-solid fa-database"></i><p>MySQL</p></div>
+      <div class="skill-card" data-aos="zoom-in"><i class="fa-brands fa-laravel"></i><p>Laravel</p></div>
+      <div class="skill-card" data-aos="zoom-in"><i class="fa-brands fa-react"></i><p>React</p></div>
+      <div class="skill-card" data-aos="zoom-in"><i class="fa-brands fa-git-alt"></i><p>Git</p></div>
+    </div>
+  </section>
+
+<!-- Education -->
+<section id="education">
+  <h2>Education</h2>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <h3>Sarjana Teknik Informatika - Universitas Nurdin Hamzah Jambi</h3>
+        <span class="edu-year">2020 - 2024</span>
+        <p><strong>IPK:</strong> 3.78/4.00</p>
+        <ul>
+          <li>Fokus: Pengembangan Perangkat Lunak, Analisis Data, Internet of Things (IoT), dan Sistem Informasi.</li>
+          <li>Skripsi: Prototype Sistem Smart Garden Berbasis IoT Untuk Pemantauan dan Pengelolaan Taman Secara Otomatis.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <h3>SMK Negeri 1 Natar Lampung Selatan - Teknik Elektronika Industri</h3>
+        <span class="edu-year">2013 - 2016</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Adzi Purnomo. All Rights Reserved.</p>
+    <div class="socials">
+      <a href="https://www.linkedin.com/in/adzipurnomo18/"><i class="fab fa-linkedin"></i></a>
+      <a href="https://github.com/Adzipurnomo18"><i class="fab fa-github"></i></a>
+      <a href="https://www.youtube.com/@adzp18"><i class="fab fa-youtube"></i></a>
+    </div>
+  </footer>
+
+  <!-- Script AOS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000,
+      once: true
+    });
+  </script>
+</body>
+</html>
