@@ -302,6 +302,7 @@ function closeZoom() {
       padding: 15px;
       z-index: 1000;
       backdrop-filter: blur(10px);
+      transition: top 0.4s ease;
     }
     header a {
       color: #38bdf8;
@@ -989,6 +990,7 @@ function closeZoom() {
       <div class="skill-card" data-aos="zoom-in"><i class="fa-brands fa-laravel"></i><p>Laravel</p></div>
       <div class="skill-card" data-aos="zoom-in"><i class="fa-brands fa-react"></i><p>React</p></div>
       <div class="skill-card" data-aos="zoom-in"><i class="fa-brands fa-git-alt"></i><p>Git</p></div>
+      <div class="skill-card" data-aos="zoom-in"><i class="fa-solid fa-code"></i><p>Golang</p></div>
     </div>
   </section>
 
@@ -1039,20 +1041,24 @@ function closeZoom() {
   <script>
 let lastScrollTop = 0;
 const header = document.querySelector('header');
+let headerHeight = header ? header.offsetHeight : 80;
 
 window.addEventListener('scroll', function() {
-  let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  headerHeight = header.offsetHeight;
 
   if (scrollTop > lastScrollTop) {
-    // Scroll ke bawah -> sembunyikan header
-    header.style.top = '-80px'; 
+    header.style.top = `-${headerHeight}px`;
   } else {
-    // Scroll ke atas -> tampilkan header
     header.style.top = '0';
   }
   lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // Hindari nilai negatif
 });
-</script>
+
+window.addEventListener('resize', function() {
+  headerHeight = header.offsetHeight;
+});
+  </script>
 
 </body>
 </html>
