@@ -248,6 +248,123 @@
       color: #e0f2fe;
     }
 
+    .logo-scan {
+      width: 72px;
+      height: 72px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      background: rgba(7, 12, 22, 0.7);
+      box-shadow: 0 18px 32px rgba(2, 6, 23, 0.45);
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 16px;
+      animation: logoFloat 8s ease-in-out infinite;
+    }
+
+    .logo-scan img {
+      width: 70%;
+      height: 70%;
+      object-fit: contain;
+      filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.4));
+      z-index: 2;
+    }
+
+    .logo-scan::before,
+    .logo-scan::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .logo-scan::before {
+      background: linear-gradient(transparent 35%, rgba(56, 189, 248, 0.25) 50%, transparent 65%);
+      transform: translateY(-120%);
+      animation: scanHorizontal 7.5s ease-in-out infinite;
+    }
+
+    .logo-scan::after {
+      background: linear-gradient(90deg, transparent 35%, rgba(250, 204, 21, 0.22) 50%, transparent 65%);
+      transform: translateX(-120%);
+      animation: scanVertical 8s ease-in-out infinite;
+      animation-delay: 3.2s;
+    }
+
+    .logo-scan .scan-grid {
+      position: absolute;
+      inset: -20%;
+      background-image:
+        repeating-linear-gradient(0deg, rgba(56, 189, 248, 0.08), rgba(56, 189, 248, 0.08) 1px, transparent 1px, transparent 8px),
+        repeating-linear-gradient(90deg, rgba(56, 189, 248, 0.06), rgba(56, 189, 248, 0.06) 1px, transparent 1px, transparent 10px);
+      opacity: 0.35;
+      mix-blend-mode: screen;
+      animation: gridShift 12s linear infinite;
+    }
+
+    .logo-scan .scan-glow {
+      position: absolute;
+      inset: -40%;
+      background: conic-gradient(from 120deg, rgba(56, 189, 248, 0.14), transparent 45%, rgba(250, 204, 21, 0.14), transparent 75%);
+      opacity: 0.5;
+      animation: glowSpin 14s linear infinite;
+    }
+
+    .logo-scan .scan-flicker {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 60%);
+      opacity: 0.2;
+      animation: flicker 4.8s steps(4) infinite;
+    }
+
+    @keyframes scanHorizontal {
+      0% { transform: translateY(-120%); opacity: 0; }
+      25% { opacity: 0.6; }
+      55% { transform: translateY(120%); opacity: 0.5; }
+      100% { transform: translateY(120%); opacity: 0; }
+    }
+
+    @keyframes scanVertical {
+      0% { transform: translateX(-120%); opacity: 0; }
+      25% { opacity: 0.55; }
+      55% { transform: translateX(120%); opacity: 0.45; }
+      100% { transform: translateX(120%); opacity: 0; }
+    }
+
+    @keyframes gridShift {
+      0% { transform: translate(0, 0); }
+      50% { transform: translate(-6px, 4px); }
+      100% { transform: translate(0, 0); }
+    }
+
+    @keyframes glowSpin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes flicker {
+      0%, 100% { opacity: 0.18; }
+      40% { opacity: 0.28; }
+      60% { opacity: 0.12; }
+    }
+
+    @keyframes logoFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-3px); }
+    }
+
+    body[data-theme="light"] .logo-scan {
+      background: rgba(248, 250, 252, 0.9);
+      border-color: rgba(14, 165, 233, 0.4);
+      box-shadow: 0 18px 32px rgba(15, 23, 42, 0.12);
+    }
+
+    body[data-theme="light"] .logo-scan img {
+      filter: drop-shadow(0 0 8px rgba(14, 165, 233, 0.35));
+    }
+
     .hero-subtitle {
       color: var(--muted);
       font-size: 18px;
@@ -888,6 +1005,12 @@
     <div class="container">
       <div class="bento-grid hero-grid">
         <div class="bento-card span-7" data-aos="fade-right">
+          <div class="logo-scan">
+            <span class="scan-glow"></span>
+            <span class="scan-grid"></span>
+            <span class="scan-flicker"></span>
+            <img src="logo.png" alt="Logo">
+          </div>
           <div class="eyebrow" data-i18n="hero_eyebrow">Future CV</div>
           <h1 class="hero-title">Adzi Purnomo</h1>
           <p class="hero-subtitle" data-i18n="hero_subtitle">Technician | Web Developer | IT Staff</p>
