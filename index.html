@@ -3,1062 +3,1615 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio |  A D Z I</title>
-  <link rel="icon" href="https://cdn.pixabay.com/photo/2025/09/16/07/40/07-40-32-704_1280.png" type="image/png"> <!-- Replace with your logo URL -->
-  <!-- Font Awesome untuk Icon -->
+  <title>Portfolio | A D Z I</title>
+  <link rel="icon" href="logo.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <!-- AOS Animation -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-  <!-- Lightbox2 CSS -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet" />
-  <!-- Lightbox2 JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
-  <script>
-function openModal(id) {
-  document.getElementById(id).style.display = "block";
-}
-
-function closeModal(id) {
-  document.getElementById(id).style.display = "none";
-}
-
-// biar bisa klik di luar modal untuk close
-window.onclick = function(event) {
-  let modal = document.getElementById("modalPortfolio");
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
-</script>
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const items = document.querySelectorAll(".timeline-item");
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("show");
-        }
-      });
-    }, { threshold: 0.2 });
-
-    items.forEach(item => observer.observe(item));
-  });
-</script>
-
-
-<script>
-function zoomImage(src) {
-  document.getElementById("zoomedImage").src = src;
-  document.getElementById("zoomModal").style.display = "flex";
-}
-
-function closeZoom() {
-  document.getElementById("zoomModal").style.display = "none";
-}
-</script>
-<!-- Modal Zoom Universal -->
-<div id="zoomModal" class="zoom-modal" onclick="closeZoom()">
-  <span class="close" onclick="closeZoom()">&times;</span>
-  <div class="zoom-content">
-    <img id="zoomedImage" src="" />
-    <iframe id="zoomedVideo" src="" frameborder="0" allowfullscreen></iframe>
-  </div>
-</div>
-
-<script>
-function zoomImage(src) {
-  document.getElementById("zoomModal").style.display = "block";
-  document.getElementById("zoomedImage").style.display = "block";
-  document.getElementById("zoomedVideo").style.display = "none";
-  document.getElementById("zoomedImage").src = src;
-}
-
-function zoomVideo(youtubeUrl) {
-  document.getElementById("zoomModal").style.display = "block";
-  document.getElementById("zoomedImage").style.display = "none";
-  document.getElementById("zoomedVideo").style.display = "block";
-
-  // Convert short youtu.be link → embed
-  let embedUrl = youtubeUrl.replace("youtu.be/", "www.youtube.com/embed/").split("?")[0];
-  document.getElementById("zoomedVideo").src = embedUrl;
-}
-
-function closeZoom() {
-  document.getElementById("zoomModal").style.display = "none";
-  document.getElementById("zoomedImage").src = "";
-  document.getElementById("zoomedVideo").src = "";
-}
-</script>
-
-<style>
-/* ======== MOBILE RESPONSIVE ======== */
-@media screen and (max-width: 768px) {
-  /* Section padding biar tidak mepet */
-  section {
-    padding: 40px 15px;
-    text-align: center;
-  }
-
-  /* Judul (About, Experience, dst) */
-  h1 {
-    font-size: 26px;
-    font-weight: bold;
-  }
-
-  h2 {
-    font-size: 22px;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-
-  p {
-    font-size: 14px;
-    line-height: 1.6;
-  }
-
-  /* About section (foto + teks jadi vertikal) */
-  .about-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .about-container img {
-    max-width: 180px;
-    margin-bottom: 20px;
-  }
-
-  /* Experience / Projects card */
-  .projects-container, .experience-container {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
-  .project-card, .experience-card {
-    width: 100%;
-    margin: 0 auto;
-  }
-
-  /* Skills jadi grid 2 kolom */
-  .skills-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-  }
-
-  .skill-card {
-    padding: 15px;
-  }
-
-  /* Education timeline biar full */
-  .timeline {
-    padding: 0;
-  }
-
-  .timeline-item {
-    width: 100%;
-    margin: 20px 0;
-  }
-
-  .timeline-content {
-    text-align: left;
-    padding: 15px;
-  }
-}
-
-/* ======== EXTRA SMALL (HP < 480px) ======== */
-@media screen and (max-width: 480px) {
-  h1 {
-    font-size: 22px;
-  }
-
-  h2 {
-    font-size: 18px;
-  }
-
-  .skills-grid {
-    grid-template-columns: 1fr; /* jadi 1 kolom */
-  }
-}
-
-  .zoom-modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0; top: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.8);
-    justify-content: center;
-    align-items: center;
-  }
-  .zoom-content {
-    max-width: 90%;
-    max-height: 90%;
-  }
-  .zoom-content img, 
-  .zoom-content iframe {
-    max-width: 100%;
-    max-height: 80vh;
-    display: block;
-    margin: auto;
-  }
-  .close {
-    position: absolute;
-    top: 15px; right: 20px;
-    color: white;
-    font-size: 30px;
-    cursor: pointer;
-  }
-  </style>
 
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #05070f;
+      --bg-2: #0b1324;
+      --card: rgba(9, 15, 28, 0.82);
+      --card-border: rgba(56, 189, 248, 0.2);
+      --cyan: #38bdf8;
+      --lime: #a3e635;
+      --amber: #facc15;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --glow-1: rgba(56, 189, 248, 0.12);
+      --glow-2: rgba(250, 204, 21, 0.12);
+      --shadow: 0 20px 50px rgba(2, 6, 23, 0.55);
+    }
 
-   body {
-  font-family: Arial, sans-serif;
-  color: #e2e8f0;
-  scroll-behavior: smooth;
+    body[data-theme="light"] {
+      --bg: #f8fafc;
+      --bg-2: #e2e8f0;
+      --card: rgba(255, 255, 255, 0.82);
+      --card-border: rgba(56, 189, 248, 0.35);
+      --cyan: #0ea5e9;
+      --lime: #65a30d;
+      --amber: #f59e0b;
+      --text: #0f172a;
+      --muted: #475569;
+      --glow-1: rgba(14, 165, 233, 0.12);
+      --glow-2: rgba(245, 158, 11, 0.12);
+      --shadow: 0 20px 50px rgba(15, 23, 42, 0.18);
+    }
 
-  /* Ganti warna jadi gambar */
-  background-image: url("https://cdn.pixabay.com/photo/2018/09/16/23/48/tech-3682674_1280.jpg");
-  background-size: cover;      /* biar full layar */
-  background-position: center; /* posisi tengah */
-  background-attachment: fixed;/* efek parallax (opsional) */
-}
-  /* Modal umum */
-  .modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.8);
-    justify-content: center; /* center horizontal */
-    align-items: center;     /* center vertical */
-  }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  /* Konten gambar/video di modal */
-  .modal-content {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    justify-content: center;
-    align-items: center;
-    max-width: 90%;
-    max-height: 80%;
-    margin: auto;
-    overflow-y: auto;
-    padding: 20px;
-    background: #111;
-    border-radius: 10px;
-  }
+    body {
+      font-family: "Space Grotesk", sans-serif;
+      color: var(--text);
+      background: radial-gradient(1200px 600px at 10% 10%, var(--glow-1), transparent 60%),
+                  radial-gradient(900px 500px at 90% 20%, var(--glow-2), transparent 60%),
+                  linear-gradient(160deg, var(--bg) 0%, var(--bg-2) 45%, var(--bg) 100%);
+      min-height: 100vh;
+      scroll-behavior: smooth;
+    }
 
-  /* Gambar di modal */
-  .modal-content img {
-    max-width: 100%;
-    max-height: 400px;
-    cursor: pointer;
-    border-radius: 8px;
-    transition: transform 0.3s;
-  }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(rgba(56, 189, 248, 0.1) 1px, transparent 1px);
+      background-size: 120px 120px;
+      opacity: 0.3;
+      pointer-events: none;
+      z-index: -1;
+    }
 
-  .modal-content img:hover {
-    transform: scale(1.05);
-  }
+    body[data-theme="light"]::before {
+      background-image: radial-gradient(rgba(14, 165, 233, 0.15) 1px, transparent 1px);
+      opacity: 0.22;
+    }
 
-  /* Video YouTube di modal */
-  .modal-content iframe {
-    width: 80%;
-    height: 450px;
-    border: none;
-    border-radius: 10px;
-  }
-    header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background: rgba(15, 23, 42, 0.9);
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    padding: 15px;
-    z-index: 1000;
-    backdrop-filter: blur(10px);
-    transition: top 0.4s ease; /* animasi saat muncul/hilang */
-}
+    body[data-theme="light"] header {
+      background: rgba(248, 250, 252, 0.88);
+      border-bottom-color: rgba(14, 165, 233, 0.2);
+    }
+
+    body[data-theme="light"] header a {
+      color: #1f2937;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(1200px, 92vw);
+      margin: 0 auto;
+    }
 
     header {
       position: fixed;
-      top: 0; left: 0; right: 0;
-      background: rgba(15, 23, 42, 0.9);
+      top: 0;
+      left: 0;
+      right: 0;
       display: flex;
       justify-content: center;
-      gap: 30px;
-      padding: 15px;
+      gap: 28px;
+      padding: 14px 20px;
+      background: rgba(5, 10, 20, 0.7);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(56, 189, 248, 0.15);
       z-index: 1000;
-      backdrop-filter: blur(10px);
       transition: top 0.4s ease;
     }
+
     header a {
-      color: #38bdf8;
-      text-decoration: none;
-      font-weight: bold;
-      transition: 0.3s;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 0.4px;
+      transition: color 0.3s ease;
     }
-    header a:hover { color: #facc15; }
+
+    header a:hover {
+      color: var(--cyan);
+    }
+
+    .lang-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      color: var(--text);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .lang-toggle:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 22px rgba(56, 189, 248, 0.2);
+    }
+
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      color: var(--text);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 22px rgba(56, 189, 248, 0.2);
+    }
+
+    body[data-theme="light"] .lang-toggle,
+    body[data-theme="light"] .theme-toggle {
+      background: rgba(255, 255, 255, 0.8);
+      border-color: rgba(14, 165, 233, 0.35);
+    }
 
     section {
-      min-height: 100vh;
-      padding: 80px 20px;
+      padding: 110px 0 80px;
+    }
+
+    .section-head {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .section-head h2 {
+      font-family: "Orbitron", sans-serif;
+      font-size: 28px;
+      color: var(--cyan);
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .span-12 { grid-column: span 12; }
+    .span-9 { grid-column: span 9; }
+    .span-8 { grid-column: span 8; }
+    .span-7 { grid-column: span 7; }
+    .span-6 { grid-column: span 6; }
+    .span-5 { grid-column: span 5; }
+    .span-4 { grid-column: span 4; }
+    .span-3 { grid-column: span 3; }
+
+    .bento-card {
+      position: relative;
+      padding: 22px;
+      border-radius: 22px;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+    }
+
+    .bento-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(250, 204, 21, 0.15));
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+    }
+
+    .bento-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(56, 189, 248, 0.5);
+      box-shadow: 0 30px 70px rgba(3, 7, 18, 0.6);
+    }
+
+    .bento-card:hover::before {
+      opacity: 1;
+    }
+
+    .hero-title {
+      font-family: "Orbitron", sans-serif;
+      font-size: clamp(32px, 4vw, 52px);
+      margin-bottom: 12px;
+      letter-spacing: 1.5px;
+      color: #e0f2fe;
+    }
+
+    .hero-subtitle {
+      color: var(--muted);
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .eyebrow {
+      color: var(--lime);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 2px;
+      margin-bottom: 14px;
+    }
+
+    .btn,
+    .ghost-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 22px;
+      border-radius: 14px;
+      font-weight: 600;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+
+    .btn {
+      background: linear-gradient(120deg, var(--cyan), var(--amber));
+      color: #04111f;
+      box-shadow: 0 14px 28px rgba(56, 189, 248, 0.3);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px) scale(1.02);
+    }
+
+    .ghost-btn {
+      border-color: rgba(148, 163, 184, 0.4);
+      color: var(--text);
+      background: rgba(15, 23, 42, 0.4);
+    }
+
+    .ghost-btn:hover {
+      border-color: var(--cyan);
+      box-shadow: 0 14px 28px rgba(56, 189, 248, 0.18);
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .chip {
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      font-size: 12px;
+      color: #bae6fd;
+    }
+
+    .profile-card {
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      gap: 18px;
       align-items: center;
       text-align: center;
     }
 
-    h1, h2 {
-    color: #38bdf8;
-    margin-bottom: 18px;
-    font-weight: bold;      /* Membuat tulisan tebal */
-    }
-
-    /* Atur ukuran berbeda untuk h1 dan h2 */
-    h1 {
-      font-size: 50px;        /* Bisa diganti sesuai kebutuhan */
-    }
-
-    h2 {
-      font-size: 26px;        /* Bisa diganti sesuai kebutuhan */
-    }
-
-
-    p {
-      max-width: 700px;
-      line-height: 1.8;
-      margin-bottom: 20px;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 12px 24px;
-      background: linear-gradient(45deg, #38bdf8, #facc15);
-      color: #0f172a;
-      border-radius: 12px;
-      font-weight: bold;
-      text-decoration: none;
-      transition: 0.3s;
-      margin-top: 10px;
-    }
-    .btn:hover { transform: scale(1.05); }
-
-    .stats {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 30px;
-      margin-top: 20px;
-    }
-    .stat-box {
-      background: #1e293b;
-      padding: 20px;
-      border-radius: 12px;
-      min-width: 120px;
-      box-shadow: 0 0 15px rgba(56,189,248,0.2);
-    }
-    .stat-box h3 { font-size: 26px; color: #facc15; }
-
-    .skills-grid {
-      display: flex;
-      flex-wrap: wrap; /* Supaya bisa turun kalau kepanjangan */
-      justify-content: center; /* Biar rata tengah */
-      gap: 20px;
-      margin-top: 20px;
-    }
-
-    .skill-card {
-      background: #1e293b;
-      padding: 20px;
-      border-radius: 12px;
-      transition: 0.3s;
-      text-align: center;
-      min-width: 120px; /* supaya ukurannya konsisten */
-    }
-
-    .skill-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 0 15px rgba(250,204,21,0.3);
-    }
-    .skill-card i {
-      font-size: 28px;
-      margin-bottom: 10px;
-      color: #38bdf8;
-    }
     .profile-pic {
       width: 150px;
       height: 150px;
-      border-radius: 50%;  /* bikin bulat */
-      object-fit: cover;   /* biar proporsional */
-      border: 4px solid #38bdf8;
-      margin-bottom: 20px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-    }
-    #about {
-      text-align: center;  
-    }
-    #about p {
-      max-width: 800px; /* biar nggak terlalu panjang */
-      margin: 0 auto;   /* posisi ke tengah */
-      line-height: 1.6; /* biar enak dibaca */
+      border-radius: 24px;
+      object-fit: cover;
+      border: 2px solid rgba(56, 189, 248, 0.5);
+      box-shadow: 0 20px 35px rgba(15, 23, 42, 0.6);
     }
 
-    footer {
-      padding: 30px;
-      text-align: center;
-      background: #1e293b;
-      color: #94a3b8;
-      margin-top: 50px;
-    }
-    footer p {
-      text-align: center;   /* pastikan teks rata tengah */
-      margin: 0 auto;       /* biar posisi benar2 ke tengah */
-      display: block;       /* pastikan sebagai block element */
-      width: 100%;          /* isi lebar penuh */
-      font-size: 14px;
-      font-weight: 500;     /* agak tebal biar jelas */
-    }
-
-    #experience {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 40px 20px;
-    }
-
-    #experience h2 {
-      text-align: center;
-      margin-bottom: 20px;
-      color: #38bdf8;
-    }
-
-    #experience p {
-      font-weight: bold;
-      text-align: center;
-      margin-bottom: 15px;
-    }
-
-    #experience ul {
-      text-align: left;
-      line-height: 1.6;
-      margin: 0 auto;
-      max-width: 800px;
-    }
-    #projects {
-    padding: 60px 20px;
-    text-align: center;
-    color: #fff;
-    }
-
-    #projects h2 {
-      font-size: 2rem;
-      color: #38bdf8;
-      margin-bottom: 40px;
-    }
-
-    .projects-container {
+    .mini-grid {
+      width: 100%;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-      max-width: 1100px;
-      margin: 0 auto;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
     }
 
-    .project-card {
-      background: rgba(0, 0, 0, 0.6);
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    .mini-card {
+      background: rgba(15, 23, 42, 0.6);
+      border-radius: 16px;
+      padding: 12px;
+      font-size: 13px;
+      color: var(--muted);
+      border: 1px solid rgba(56, 189, 248, 0.18);
     }
 
-    .project-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+    .stat-number {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--amber);
+      margin-bottom: 6px;
     }
 
-    .project-card h3 {
-      color: #38bdf8;
+    .stat-label {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .about-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .about-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      color: var(--muted);
+    }
+
+    .about-item i {
+      color: var(--cyan);
+      margin-top: 4px;
+    }
+
+    .impact-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .impact-list li {
+      list-style: none;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .impact-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+    }
+
+    .projects-grid .project-card h3 {
+      color: #e0f2fe;
+      margin-bottom: 12px;
+      font-size: 20px;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 14px 0;
+    }
+
+    .project-tags span {
+      background: rgba(163, 230, 53, 0.15);
+      border: 1px solid rgba(163, 230, 53, 0.25);
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      color: #d9f99d;
+    }
+
+    .gallery-preview {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin: 16px 0;
+    }
+
+    .gallery-thumb {
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      background: rgba(2, 6, 23, 0.35);
+      aspect-ratio: 16 / 9;
+    }
+
+    .gallery-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.35s ease;
+    }
+
+    .gallery-thumb:hover img {
+      transform: scale(1.05);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .skill-card {
+      text-align: center;
+    }
+
+    .skill-card i {
+      font-size: 26px;
+      color: var(--cyan);
       margin-bottom: 10px;
     }
 
-    .project-card p {
-      font-size: 0.95rem;
-      margin-bottom: 15px;
-      line-height: 1.6;
+    .education-grid .bento-card h3 {
+      color: #e0f2fe;
+      margin-bottom: 8px;
     }
 
-    .project-card .btn {
+    .edu-year {
       display: inline-block;
-      padding: 8px 16px;
-      background: #38bdf8;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 8px;
-      transition: background 0.3s ease;
+      margin-bottom: 12px;
+      color: var(--muted);
+      font-size: 13px;
     }
 
-    .project-card .btn:hover {
-      background: #0284c7;
+    footer {
+      padding: 40px 0 60px;
+      text-align: center;
+      border-top: 1px solid rgba(56, 189, 248, 0.1);
     }
 
-    .modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.8);
-  }
+    .contact-form {
+      display: grid;
+      gap: 12px;
+      max-width: 520px;
+      margin: 18px auto 0;
+      text-align: left;
+    }
 
-  .modal-content {
-    margin: 5% auto;
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    flex-wrap: wrap;
-    width: 80%;
-  }
+    .contact-card {
+      max-width: 720px;
+      margin: 0 auto 24px;
+      text-align: left;
+      position: relative;
+    }
 
-  .modal-content img {
-    max-width: 300px;
-    border-radius: 8px;
-    transition: transform 0.3s ease;
-  }
-  .modal-content img:hover {
-    transform: scale(1.05);
-  }
+    .contact-card::after {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      border-radius: 24px;
+      background: linear-gradient(120deg, rgba(56, 189, 248, 0.35), rgba(250, 204, 21, 0.15));
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      z-index: -1;
+    }
 
-  .close {
-    position: absolute;
-    top: 15px;
-    right: 25px;
-    color: #fff;
-    font-size: 35px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  /* Zoom Modal */
-  .zoom-modal {
-    display: none;
-    position: fixed;
-    z-index: 2000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.9);
-    justify-content: center;
-    align-items: center;
-  }
+    .contact-card:hover::after {
+      opacity: 1;
+    }
 
-  .zoom-modal img {
-    max-width: 90%;
-    max-height: 90%;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(255,255,255,0.3);
-    animation: zoomIn 0.3s ease;
-  }
+    .contact-card p {
+      color: var(--muted);
+      margin-top: 8px;
+      margin-bottom: 0;
+    }
 
-@keyframes zoomIn {
-  from { transform: scale(0.7); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
+    .contact-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: #bae6fd;
+      margin-top: 14px;
+      transition: transform 0.3s ease;
+    }
 
-    /* Animasi zoom in */
-    @keyframes zoomIn {
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
+    .contact-card:hover .contact-cta {
+      transform: translateX(4px);
+    }
+
+    .contact-field {
+      display: grid;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      background: rgba(8, 14, 26, 0.8);
+      color: var(--text);
+      font-family: "Space Grotesk", sans-serif;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      border-color: rgba(56, 189, 248, 0.7);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+    }
+
+    .contact-form input:hover,
+    .contact-form textarea:hover {
+      border-color: rgba(56, 189, 248, 0.5);
+    }
+
+    .contact-form textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .contact-form .btn {
+      justify-content: center;
+      width: 100%;
+    }
+
+    .socials {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      margin-top: 18px;
     }
 
     .socials a {
-      color: #38bdf8;
-      margin: 0 10px;
-      font-size: 22px;
-      transition: 0.3s;
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      color: var(--cyan);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-  #education {
-    padding: 100px 20px;
-    text-align: center;
-  }
 
-  #education h2 {
-    font-size: 26px;
-    font-weight: bold;
-    margin-bottom: 40px;
-    color: #00bfff;
-    position: relative;
-  }
+    body[data-theme="light"] .hero-title,
+    body[data-theme="light"] .projects-grid .project-card h3,
+    body[data-theme="light"] .education-grid .bento-card h3 {
+      color: #0f172a;
+    }
 
-/* Animasi */
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-80px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
+    body[data-theme="light"] .hero-subtitle,
+    body[data-theme="light"] .section-head p,
+    body[data-theme="light"] .about-item,
+    body[data-theme="light"] .impact-list,
+    body[data-theme="light"] .stat-label,
+    body[data-theme="light"] .contact-card p {
+      color: #334155;
+    }
 
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(80px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
+    body[data-theme="light"] .chip {
+      background: rgba(14, 165, 233, 0.12);
+      border-color: rgba(14, 165, 233, 0.3);
+      color: #1e3a8a;
+    }
 
-/* Timeline item default (sembunyi dulu) */
-.timeline-item {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.8s ease;
-}
+    body[data-theme="light"] .mini-card {
+      background: rgba(226, 232, 240, 0.9);
+      color: #1f2937;
+      border-color: rgba(14, 165, 233, 0.25);
+    }
 
-/* Saat aktif (muncul) */
-.timeline-item.show {
-  opacity: 1;
-  transform: translateY(0);
-}
+    body[data-theme="light"] .stat-number {
+      color: #f59e0b;
+    }
 
-.timeline {
-  position: relative;
-  max-width: 800px;
-  margin: auto;
-}
+    body[data-theme="light"] .project-tags span {
+      background: rgba(101, 163, 13, 0.16);
+      border-color: rgba(101, 163, 13, 0.35);
+      color: #365314;
+    }
 
-.timeline::after {
-  content: '';
-  position: absolute;
-  width: 3px;
-  background: #00bfff;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  margin-left: -1.5px;
-}
+    body[data-theme="light"] .gallery-thumb {
+      border-color: rgba(14, 165, 233, 0.3);
+      background: rgba(248, 250, 252, 0.9);
+    }
 
-.timeline-item {
-  padding: 20px;
-  position: relative;
-  width: 50%;
-}
+    body[data-theme="light"] .contact-cta {
+      color: #1e40af;
+    }
 
-.timeline-item:nth-child(odd) {
-  left: 0;
-}
+    body[data-theme="light"] .ghost-btn {
+      background: rgba(226, 232, 240, 0.9);
+      color: #0f172a;
+      border-color: rgba(14, 165, 233, 0.35);
+    }
 
-.timeline-item:nth-child(even) {
-  left: 50%;
-}
+    body[data-theme="light"] .socials a {
+      background: rgba(248, 250, 252, 0.9);
+      border-color: rgba(14, 165, 233, 0.3);
+      color: #0ea5e9;
+    }
 
-.timeline-content {
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  position: relative;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  backdrop-filter: blur(6px);
-  color: #fff;
-  text-align: left;
-}
+    body[data-theme="light"] .contact-form input,
+    body[data-theme="light"] .contact-form textarea {
+      background: rgba(248, 250, 252, 0.95);
+      color: #0f172a;
+      border-color: rgba(14, 165, 233, 0.3);
+    }
 
-.timeline-content h3 {
-  margin-top: 0;
-  font-size: 18px;
-  font-weight: bold;
-}
+    .socials a:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 28px rgba(56, 189, 248, 0.25);
+    }
 
-.timeline-content .edu-year {
-  font-size: 14px;
-  color: #ccc;
-  display: block;
-  margin-bottom: 10px;
-}
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 6, 23, 0.85);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+    }
 
-.timeline-item::before {
-  content: '';
-  position: absolute;
-  top: 20px;
-  right: -10px;
-  width: 20px;
-  height: 20px;
-  background: #00bfff;
-  border-radius: 50%;
-  border: 3px solid #fff;
-}
+    .modal-content {
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 20px;
+      padding: 24px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      max-width: 900px;
+      width: 100%;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+    }
 
-.timeline-item:nth-child(even)::before {
-  left: -10px;
-}
-  .socials a:hover { color: #facc15; }
+    .modal-content img {
+      border-radius: 14px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
 
-  /* ======== RESPONSIVE LAYOUT ======== */
+    .modal-content img:hover {
+      transform: scale(1.05);
+    }
 
-/* Untuk layar tablet & HP */
-@media (max-width: 768px) {
-  /* Navbar */
-  header {
-    flex-direction: column;
-    gap: 15px;
-    text-align: center;
-  }
+    .close {
+      position: absolute;
+      top: 18px;
+      right: 24px;
+      font-size: 32px;
+      color: #fff;
+      cursor: pointer;
+    }
 
-  /* Hero Section */
-  #hero h1 {
-    font-size: 28px;
-  }
-  #hero h3 {
-    font-size: 18px;
-  }
+    .gallery-modal {
+      align-items: stretch;
+    }
 
-  /* Projects */
-  .projects-container {
-    grid-template-columns: 1fr;
-  }
+    .gallery-content {
+      max-width: 1100px;
+      max-height: 82vh;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      overflow: hidden;
+    }
 
-  /* Skills jadi 2 kolom */
-  .skills-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-  }
+    .gallery-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(9, 15, 28, 0.85);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      backdrop-filter: blur(10px);
+    }
 
-  /* Education Timeline jadi satu kolom */
-  .timeline-item {
-    width: 100%;
-    left: 0 !important;
-    padding-left: 20px;
-    padding-right: 20px;
-    text-align: left;
-  }
+    .gallery-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
 
-  .timeline::after {
-    left: 10px;
-  }
+    .gallery-filter {
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      background: rgba(56, 189, 248, 0.12);
+      color: #bae6fd;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
 
-  /* Footer */
-  footer {
-    flex-direction: column;
-    text-align: center;
-  }
+    .gallery-filter.active {
+      background: linear-gradient(120deg, var(--cyan), var(--amber));
+      color: #04111f;
+      box-shadow: 0 12px 24px rgba(56, 189, 248, 0.25);
+    }
 
-  footer .socials {
-    justify-content: center;
-    margin-top: 10px;
-  }
-}
+    .gallery-filter:hover {
+      transform: translateY(-1px);
+    }
 
-/* Untuk layar HP kecil */
-@media (max-width: 480px) {
-  #hero h1 {
-    font-size: 22px;
-  }
+    .gallery-count {
+      font-size: 12px;
+      color: var(--muted);
+      display: inline-flex;
+      gap: 6px;
+      align-items: center;
+    }
 
-  #hero h3 {
-    font-size: 16px;
-  }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      overflow: auto;
+      padding-right: 6px;
+    }
 
-  .skills-grid {
-    grid-template-columns: 1fr; /* 1 kolom saja */
-  }
-}
+    .gallery-grid::-webkit-scrollbar {
+      width: 8px;
+    }
 
+    .gallery-grid::-webkit-scrollbar-thumb {
+      background: rgba(56, 189, 248, 0.35);
+      border-radius: 999px;
+    }
+
+    body[data-theme="light"] .gallery-toolbar {
+      background: rgba(248, 250, 252, 0.95);
+      border-color: rgba(14, 165, 233, 0.3);
+    }
+
+    body[data-theme="light"] .gallery-filter {
+      background: rgba(14, 165, 233, 0.12);
+      border-color: rgba(14, 165, 233, 0.3);
+      color: #1e3a8a;
+    }
+
+    body[data-theme="light"] .gallery-count {
+      color: #334155;
+    }
+
+    .zoom-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 6, 23, 0.92);
+      z-index: 3000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .zoom-content img,
+    .zoom-content iframe {
+      max-width: 92vw;
+      max-height: 82vh;
+      border-radius: 18px;
+      box-shadow: 0 20px 50px rgba(2, 6, 23, 0.6);
+    }
+
+    @media (max-width: 900px) {
+      header {
+        flex-wrap: wrap;
+        gap: 14px;
+      }
+
+      section {
+        padding: 90px 0 70px;
+      }
+
+      .bento-grid,
+      .skills-grid {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+      }
+
+      .span-9, .span-8, .span-7, .span-6, .span-5 {
+        grid-column: span 6;
+      }
+    }
+
+    @media (max-width: 640px) {
+      header {
+        position: sticky;
+      }
+
+      .bento-grid,
+      .skills-grid {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+      }
+
+      .span-12, .span-9, .span-8, .span-7, .span-6, .span-5, .span-4, .span-3 {
+        grid-column: span 1;
+      }
+
+      .hero-subtitle {
+        font-size: 16px;
+      }
+
+      .profile-pic {
+        width: 120px;
+        height: 120px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
   </style>
 </head>
 <body>
-  <!-- Navbar -->
   <header>
-    <a href="#about">About</a>
-    <a href="#experience">Experience</a>
-    <a href="#projects">Projects</a>
-    <a href="#skills">Skills</a>
-    <a href="#education">Education</a>
+    <a href="#hero" data-i18n="nav_home">Home</a>
+    <a href="#about" data-i18n="nav_about">About</a>
+    <a href="#experience" data-i18n="nav_experience">Experience</a>
+    <a href="#projects" data-i18n="nav_projects">Projects</a>
+    <a href="#skills" data-i18n="nav_skills">Skills</a>
+    <a href="#education" data-i18n="nav_education">Education</a>
+    <a href="#contact" data-i18n="nav_contact">Contact</a>
+    <button class="lang-toggle" id="langToggle" type="button" aria-label="Toggle language">EN</button>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle theme">LIGHT</button>
   </header>
 
-<!-- Hero -->
-<section id="hero">
-  <img src="https://cdn.pixabay.com/photo/2025/09/16/02/45/profile-9836912_1280.png" alt="Foto Profil" class="profile-pic">
-  <h1>Adzi Purnomo</h1>
-  <h3>Technician | Web Developer | IT Staff</h3>
-  <a href="#projects" class="btn">Explore My Work</a>
-</section>
-
-  <!-- About -->
-<section id="about">
-  <h2 data-aos="fade-up">About Me</h2>
-  <p data-aos="fade-up" data-aos-delay="200">
-    Lulusan S1 Teknik Informatika dengan IPK 3.78, memiliki latar belakang sebagai teknisi 
-    elektronik konsumen di PT SITCOMTARA sejak 2017. Terbiasa melakukan troubleshooting 
-    perangkat, analisis teknis, dan edukasi pelanggan secara profesional. Berpengalaman 
-    mengembangkan solusi berbasis teknologi seperti IoT (Internet of Things) dan pemrograman 
-    sistem berbasis web. Menguasai bahasa pemrograman seperti JavaScript, Python, PHP, serta 
-    penggunaan database MySQL. Terbiasa menggunakan sistem operasi Linux/Ubuntu dan memiliki 
-    passion besar dalam dunia pemrograman serta pengembangan perangkat lunak. Siap berkembang 
-    bersama tim developer profesional.
-  </p>
-    <div class="stats" data-aos="fade-up" data-aos-delay="400">
-      <div class="stat-box">
-        <h3>8+</h3>
-        <p>Years Experience</p>
-      </div>
-      <div class="stat-box">
-        <h3>11</h3>
-        <p>Technologies Mastered</p>
-      </div>
-      <div class="stat-box">
-        <h3>100%</h3>
-        <p>Project Success</p>
+  <section id="hero">
+    <div class="container">
+      <div class="bento-grid hero-grid">
+        <div class="bento-card span-7" data-aos="fade-right">
+          <div class="eyebrow" data-i18n="hero_eyebrow">Future CV</div>
+          <h1 class="hero-title">Adzi Purnomo</h1>
+          <p class="hero-subtitle" data-i18n="hero_subtitle">Technician | Web Developer | IT Staff</p>
+          <div class="chip-row">
+            <span class="chip" data-i18n="hero_chip_1">IoT Builder</span>
+            <span class="chip" data-i18n="hero_chip_2">Web Systems</span>
+            <span class="chip" data-i18n="hero_chip_3">Hardware + Software</span>
+          </div>
+          <div class="chip-row" style="margin-top: 22px;">
+            <a href="#projects" class="btn" data-i18n="hero_cta_primary">Explore My Work</a>
+            <a href="#contact" class="ghost-btn" data-i18n="hero_cta_secondary">Contact Me</a>
+          </div>
+        </div>
+        <div class="bento-card profile-card span-5" data-aos="fade-left">
+          <img src="https://cdn.pixabay.com/photo/2025/09/16/02/45/profile-9836912_1280.png" alt="Foto Profil" class="profile-pic">
+          <p data-i18n="hero_profile_desc">Berbasis di Indonesia. Terbiasa menangani produk elektronik, sistem IoT, dan aplikasi berbasis web.</p>
+          <div class="mini-grid">
+            <div class="mini-card">
+              <strong data-i18n="hero_focus_label">Focus</strong><br><span data-i18n="hero_focus_value">IoT, Web Apps, Automation</span>
+            </div>
+            <div class="mini-card">
+              <strong data-i18n="hero_stack_label">Stack</strong><br><span data-i18n="hero_stack_value">JS, Python, PHP, MySQL</span>
+            </div>
+          </div>
+        </div>
+        <div class="bento-card span-4" data-aos="fade-up">
+          <div class="stat-number count-up" data-target="8" data-suffix="+">0</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="bento-card span-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="stat-number count-up" data-target="11">0</div>
+          <div class="stat-label">Technologies Mastered</div>
+        </div>
+        <div class="bento-card span-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="stat-number count-up" data-target="100" data-suffix="%">0</div>
+          <div class="stat-label">Project Success</div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Experience -->
-<section id="experience">
-  <h2 data-aos="fade-right">Experience</h2>
-  <p data-aos="fade-up">
-    - Teknisi CE (Consumer Electronics) di PT SITCOMTARA (2017 - 2025)
-  </p>
-  <ul data-aos="fade-up" data-aos-delay="200">
-    <li>
-      Melakukan diagnosa dan perbaikan lebih dari 500 perangkat elektronik konsumen
-      dengan tingkat keberhasilan 98% pada kunjungan pertama.
-    </li>
-    <li>
-      Melakukan instalasi, konfigurasi, serta edukasi teknis kepada lebih dari
-      200 pelanggan mengenai penggunaan dan perawatan produk.
-    </li>
-    <li>
-      Berhasil meningkatkan efisiensi diagnosa awal hingga 90% melalui analisis
-      pola kerusakan perangkat dan riwayat pelanggan.
-    </li>
-    <li>
-      Berkontribusi dalam peningkatan kualitas layanan teknis, selaras dengan SOP
-      perusahaan dan standar layanan pelanggan Samsung.
-    </li>
-  </ul>
-</section>
-
-
-<!-- Projects -->
-<section id="projects">
-  <h2 data-aos="fade-up">Projects</h2>
-  <div class="projects-container">
-
-    <!-- Project 1 -->
-    <div class="project-card" data-aos="fade-up" data-aos-delay="100">
-      <h3>Website Portfolio</h3>
-      <p>
-        Saya menawarkan layanan pengembangan website mulai dari desain hingga implementasi. 
-        Mampu membuat website responsif dan interaktif menggunakan teknologi terbaru seperti HTML, CSS, 
-        JavaScript, dan PHP. Cocok untuk perusahaan yang membutuhkan kehadiran online atau individu yang 
-        ingin membangun portofolio pribadi.
-      </p>
-
-      <!-- Tombol -->
-      <button class="btn" onclick="openModal('modalPortfolio1')">Lihat Screenshot</button>
-    </div>
-
-    <!-- Modal Project 1 -->
-    <div id="modalPortfolio1" class="modal">
-      <div id="zoomModal1" class="zoom-modal" onclick="closeZoom()">
-        <img id="zoomedImage1" src="">
+  <section id="about">
+    <div class="container">
+      <div class="section-head">
+        <h2 data-i18n="about_title">About Me</h2>
+        <p data-i18n="about_subtitle">Profil singkat dengan fokus pada kemampuan teknis, analisis, dan solusi digital modern.</p>
       </div>
-      <span class="close" onclick="closeModal('modalPortfolio1')">&times;</span>
-      <div class="modal-content">
-        <img src="https://cdn.pixabay.com/photo/2025/09/16/04/31/service-9836993_1280.png" onclick="zoomImage(this.src)" />
-        <img src="https://cdn.pixabay.com/photo/2024/11/30/04/27/app-9234005_1280.png" onclick="zoomImage(this.src)" />
-        <img src="https://cdn.pixabay.com/photo/2024/11/30/05/00/database-9234032_1280.png" onclick="zoomImage(this.src)" />
-        
+      <div class="bento-grid">
+        <div class="bento-card span-7" data-aos="fade-up">
+          <p data-i18n="about_body">
+            Lulusan S1 Teknik Informatika dengan IPK 3.78, memiliki latar belakang sebagai teknisi
+            elektronik konsumen di PT SITCOMTARA sejak 2017. Terbiasa melakukan troubleshooting
+            perangkat, analisis teknis, dan edukasi pelanggan secara profesional. Berpengalaman
+            mengembangkan solusi berbasis teknologi seperti IoT dan pemrograman sistem berbasis web.
+          </p>
+        </div>
+        <div class="bento-card span-5" data-aos="fade-up" data-aos-delay="150">
+          <div class="about-list">
+            <div class="about-item"><i class="fa-solid fa-microchip"></i><span data-i18n="about_item_1">Analisis perangkat dan otomasi sistem.</span></div>
+            <div class="about-item"><i class="fa-solid fa-code"></i><span data-i18n="about_item_2">Pengembangan web responsif dan interaktif.</span></div>
+            <div class="about-item"><i class="fa-solid fa-signal"></i><span data-i18n="about_item_3">Integrasi IoT untuk monitoring real time.</span></div>
+            <div class="about-item"><i class="fa-solid fa-users"></i><span data-i18n="about_item_4">Edukasi teknis dan komunikasi dengan klien.</span></div>
+          </div>
+        </div>
       </div>
     </div>
+  </section>
 
-    <!-- Project 2 -->
-    <div class="project-card" data-aos="fade-up" data-aos-delay="200">
-      <h3>Graphic Design Project</h3>
-      <p>
-        Saya memiliki pengalaman dalam desain grafis, mulai dari pembuatan logo, banner, 
-        hingga desain visual untuk keperluan media sosial. Menggunakan alat seperti Adobe Photoshop, 
-        Figma, dan Canva untuk menghasilkan desain berkualitas tinggi yang sesuai dengan kebutuhan klien.
-      </p>
-
-      <!-- Tombol -->
-      <button class="btn" onclick="openModal('modalPortfolio2')">Lihat Screenshot</button>
-    </div>
-
-    <!-- Modal Project 2 -->
-    <div id="modalPortfolio2" class="modal">
-      <div id="zoomModal2" class="zoom-modal" onclick="closeZoom()">
-        <img id="zoomedImage2" src="">
+  <section id="experience">
+    <div class="container">
+      <div class="section-head">
+        <h2 data-i18n="exp_title">Experience</h2>
+        <p data-i18n="exp_subtitle">Teknisi CE (Consumer Electronics) di PT SITCOMTARA (2017 - 2025)</p>
       </div>
-      <span class="close" onclick="closeModal('modalPortfolio2')">&times;</span>
-      <div class="modal-content">
-        <img src="https://cdn.pixabay.com/photo/2024/11/30/04/28/design-9234006_960_720.png" onclick="zoomImage(this.src)" />
-        <img src="https://cdn.pixabay.com/photo/2025/09/16/02/40/figma-9836904_1280.png" onclick="zoomImage(this.src)" />
-        <img src="https://cdn.pixabay.com/photo/2025/09/16/04/47/04-47-34-960_1280.png" onclick="zoomImage(this.src)" />
-        <img src="https://cdn.pixabay.com/photo/2025/09/16/04/49/04-49-43-584_1280.png" onclick="zoomImage(this.src)" />
-      </div>
-    </div>
-
-    <!-- Project 3 -->
-   <div class="project-card" data-aos="fade-up" data-aos-delay="200">
-      <h3>Mobile App Development</h3>
-      <p>
-       Aplikasi mobile yang dirancang untuk memudahkan pengguna dalam melakukan manajemen tugas. 
-       Aplikasi ini dibangun menggunakan Flutter dan Firebase untuk backend.
-      </p>
-
-      <!-- Tombol -->
-      <button class="btn" onclick="openModal('modalPortfolio3')">Lihat Screenshot</button>
-    </div>
-
-    <!-- Modal Project 3 -->
-    <div id="modalPortfolio3" class="modal">
-      <div id="zoomModal3" class="zoom-modal" onclick="closeZoom()">
-        <img id="zoomedImage3" src="">
-      </div>
-      <span class="close" onclick="closeModal('modalPortfolio3')">&times;</span>
-      <div class="modal-content">
-        <img src="https://cdn.pixabay.com/photo/2024/11/30/04/23/web-9234002_1280.png" onclick="zoomImage(this.src)" />
-        <img src="https://cdn.pixabay.com/photo/2024/11/30/04/47/web-9234021_1280.png" onclick="zoomImage(this.src)" />
-        <img src="https://cdn.pixabay.com/photo/2024/11/30/04/46/app-9234020_1280.png" onclick="zoomImage(this.src)" />
-        
+      <div class="bento-grid">
+        <div class="bento-card span-6" data-aos="fade-up">
+          <h3 data-i18n="exp_role_title">Role Impact</h3>
+          <ul class="impact-list">
+            <li data-i18n="exp_role_1">Diagnosa dan perbaikan 500+ perangkat dengan keberhasilan 98% di kunjungan pertama.</li>
+            <li data-i18n="exp_role_2">Instalasi dan edukasi teknis untuk 200+ pelanggan.</li>
+            <li data-i18n="exp_role_3">Efisiensi diagnosa awal naik hingga 90% lewat analisis pola kerusakan.</li>
+          </ul>
+        </div>
+        <div class="bento-card span-6" data-aos="fade-up" data-aos-delay="150">
+          <h3 data-i18n="exp_service_title">Service Excellence</h3>
+          <ul class="impact-list">
+            <li data-i18n="exp_service_1">Kolaborasi dengan tim service untuk menjaga standar layanan Samsung.</li>
+            <li data-i18n="exp_service_2">Dokumentasi kasus dan rekomendasi perawatan preventif.</li>
+            <li data-i18n="exp_service_3">Penguatan KPI layanan melalui troubleshooting berbasis data.</li>
+          </ul>
+        </div>
       </div>
     </div>
+  </section>
 
-    <!-- Project 4 -->
-  <div class="project-card" data-aos="fade-up" data-aos-delay="200">
-      <h3>Video Editing Portfolio</h3>
-      <p>
-       Beberapa proyek video editing untuk media sosial dan presentasi. 
-       Diedit menggunakan software CapCut dan KineMaster dengan efek visual dan transisi yang menarik.
-      </p>
-
-      <!-- Tombol -->
-     <button class="btn" onclick="zoomVideo('https://youtu.be/dVN2JlRGd7k?si=e18ld6nPfDKZY_xj')">
-  Lihat Video
-</button>
-
-    <!-- Modal Project 4 -->
-    <div id="modalPortfolio4" class="modal">
-      <div id="zoomModal4" class="zoom-modal" onclick="closeZoom()">
-        <img id="zoomedImage4" src="">
+  <section id="projects">
+    <div class="container">
+      <div class="section-head">
+        <h2 data-i18n="projects_title">Projects</h2>
+        <p data-i18n="projects_subtitle">Beberapa proyek unggulan dengan fokus pada pengalaman visual modern.</p>
       </div>
-      <span class="close" onclick="closeModal('modalPortfolio4')">&times;</span>
-      <div class="modal-content">
-        
+      <div class="bento-grid projects-grid">
+        <article class="bento-card project-card span-12" data-aos="fade-up">
+          <h3 data-i18n="project_suite_title">Apps Suite Gallery</h3>
+          <p data-i18n="project_suite_body">
+            Koleksi tampilan aplikasi yang pernah saya bangun untuk kebutuhan web, service center,
+            dan sistem arsip. Klik untuk melihat seluruh screenshot secara lengkap.
+          </p>
+          <div class="project-tags">
+            <span data-i18n="project_suite_tag_1">Web Apps</span>
+            <span data-i18n="project_suite_tag_2">Service System</span>
+            <span data-i18n="project_suite_tag_3">Archive Platform</span>
+          </div>
+          <div class="gallery-preview">
+            <div class="gallery-thumb"><img src="assets/projects/apps-adzi-web-1.png" alt="Apps Adzi Web 1"></div>
+            <div class="gallery-thumb"><img src="assets/projects/apps-elektron-1.png" alt="Apps Elektron 1"></div>
+            <div class="gallery-thumb"><img src="assets/projects/arsip-unh-1.png" alt="Arsip UNH 1"></div>
+          </div>
+          <button class="btn" onclick="openModal('modalAppsSuite')" data-i18n="project_btn_gallery">Lihat Gallery</button>
+        </article>
 
+        <article class="bento-card project-card span-7" data-aos="fade-up">
+          <h3>Website Portfolio</h3>
+          <p data-i18n="project_1_body">
+            Layanan pengembangan website dari desain hingga implementasi. Website responsif dan
+            interaktif menggunakan HTML, CSS, JavaScript, dan PHP.
+          </p>
+          <div class="project-tags">
+            <span>HTML</span><span>CSS</span><span>JavaScript</span><span>PHP</span>
+          </div>
+          <button class="btn" onclick="openModal('modalPortfolio1')" data-i18n="project_btn_view">Lihat Screenshot</button>
+        </article>
+
+        <article class="bento-card project-card span-5" data-aos="fade-up" data-aos-delay="120">
+          <h3>Graphic Design Project</h3>
+          <p data-i18n="project_2_body">
+            Desain logo, banner, dan visual media sosial dengan Adobe Photoshop, Figma, dan Canva.
+          </p>
+          <div class="project-tags">
+            <span>Figma</span><span>Photoshop</span><span>Canva</span>
+          </div>
+          <button class="btn" onclick="openModal('modalPortfolio2')" data-i18n="project_btn_view">Lihat Screenshot</button>
+        </article>
+
+        <article class="bento-card project-card span-5" data-aos="fade-up">
+          <h3>Mobile App Development</h3>
+          <p data-i18n="project_3_body">
+            Aplikasi mobile untuk manajemen tugas menggunakan Flutter dan Firebase sebagai backend.
+          </p>
+          <div class="project-tags">
+            <span>Flutter</span><span>Firebase</span><span>UX</span>
+          </div>
+          <button class="btn" onclick="openModal('modalPortfolio3')" data-i18n="project_btn_view">Lihat Screenshot</button>
+        </article>
+
+        <article class="bento-card project-card span-7" data-aos="fade-up" data-aos-delay="120">
+          <h3>Video Editing Portfolio</h3>
+          <p data-i18n="project_4_body">
+            Proyek video editing untuk media sosial dan presentasi dengan efek visual dan transisi modern.
+          </p>
+          <div class="project-tags">
+            <span>CapCut</span><span>KineMaster</span><span>Motion</span>
+          </div>
+          <button class="btn" onclick="zoomVideo('https://youtu.be/dVN2JlRGd7k?si=e18ld6nPfDKZY_xj')" data-i18n="project_btn_video">Lihat Video</button>
+        </article>
       </div>
     </div>
+  </section>
 
-  </div>
-</section>
-
-
-
-  <!-- Skills -->
   <section id="skills">
-    <h2 data-aos="fade-right">Skills</h2>
-    <div class="skills-grid">
-      <div class="skill-card" data-aos="zoom-in"><i class="fa-brands fa-html5"></i><p>HTML</p></div>
-      <div class="skill-card" data-aos="zoom-in"><i class="fa-brands fa-css3-alt"></i><p>CSS</p></div>
-      <div class="skill-card" data-aos="zoom-in"><i class="fa-brands fa-js"></i><p>JavaScript</p></div>
-      <div class="skill-card" data-aos="zoom-in"><i class="fa-brands fa-php"></i><p>PHP</p></div>
-      <div class="skill-card" data-aos="zoom-in"><i class="fa-solid fa-database"></i><p>MySQL</p></div>
-      <div class="skill-card" data-aos="zoom-in"><i class="fa-brands fa-laravel"></i><p>Laravel</p></div>
-      <div class="skill-card" data-aos="zoom-in"><i class="fa-brands fa-react"></i><p>React</p></div>
-      <div class="skill-card" data-aos="zoom-in"><i class="fa-brands fa-git-alt"></i><p>Git</p></div>
-      <div class="skill-card" data-aos="zoom-in"><i class="fa-solid fa-code"></i><p>Golang</p></div>
+    <div class="container">
+      <div class="section-head">
+        <h2 data-i18n="skills_title">Skills</h2>
+        <p data-i18n="skills_subtitle">Teknologi yang dikuasai untuk membangun solusi digital end-to-end.</p>
+      </div>
+      <div class="skills-grid">
+        <div class="bento-card skill-card span-3" data-aos="zoom-in"><i class="fa-brands fa-html5"></i><p>HTML</p></div>
+        <div class="bento-card skill-card span-3" data-aos="zoom-in"><i class="fa-brands fa-css3-alt"></i><p>CSS</p></div>
+        <div class="bento-card skill-card span-3" data-aos="zoom-in"><i class="fa-brands fa-js"></i><p>JavaScript</p></div>
+        <div class="bento-card skill-card span-3" data-aos="zoom-in"><i class="fa-brands fa-php"></i><p>PHP</p></div>
+        <div class="bento-card skill-card span-3" data-aos="zoom-in"><i class="fa-solid fa-database"></i><p>MySQL</p></div>
+        <div class="bento-card skill-card span-3" data-aos="zoom-in"><i class="fa-brands fa-laravel"></i><p>Laravel</p></div>
+        <div class="bento-card skill-card span-3" data-aos="zoom-in"><i class="fa-brands fa-react"></i><p>React</p></div>
+        <div class="bento-card skill-card span-3" data-aos="zoom-in"><i class="fa-brands fa-git-alt"></i><p>Git</p></div>
+        <div class="bento-card skill-card span-3" data-aos="zoom-in"><i class="fa-solid fa-code"></i><p>Golang</p></div>
+      </div>
     </div>
   </section>
 
-<!-- Education -->
-<section id="education">
-  <h2>Education</h2>
-  <div class="timeline">
-    <div class="timeline-item">
-      <div class="timeline-content">
-        <h3>Sarjana Teknik Informatika - Universitas Nurdin Hamzah Jambi</h3>
-        <span class="edu-year">2020 - 2024</span>
-        <p><strong>IPK:</strong> 3.78/4.00</p>
-        <ul>
-          <li>Fokus: Pengembangan Perangkat Lunak, Analisis Data, Internet of Things (IoT), dan Sistem Informasi.</li>
-          <li>Skripsi: Prototype Sistem Smart Garden Berbasis IoT Untuk Pemantauan dan Pengelolaan Taman Secara Otomatis.</li>
-        </ul>
+  <section id="education">
+    <div class="container">
+      <div class="section-head">
+        <h2 data-i18n="edu_title">Education</h2>
+        <p data-i18n="edu_subtitle">Perjalanan akademik dan fokus pembelajaran utama.</p>
+      </div>
+      <div class="bento-grid education-grid">
+        <div class="bento-card span-6" data-aos="fade-up">
+          <h3>Sarjana Teknik Informatika - Universitas Nurdin Hamzah Jambi</h3>
+          <span class="edu-year">2020 - 2024</span>
+          <p><strong data-i18n="edu_gpa_label">IPK:</strong> <span>3.78/4.00</span></p>
+          <ul class="impact-list">
+            <li data-i18n="edu_focus_1">Fokus: Pengembangan Perangkat Lunak, Analisis Data, IoT, Sistem Informasi.</li>
+            <li data-i18n="edu_focus_2">Skripsi: Prototype Sistem Smart Garden Berbasis IoT.</li>
+          </ul>
+        </div>
+        <div class="bento-card span-6" data-aos="fade-up" data-aos-delay="120">
+          <h3>SMK Negeri 1 Natar Lampung Selatan - Teknik Elektronika Industri</h3>
+          <span class="edu-year">2013 - 2016</span>
+          <p data-i18n="edu_focus_3">Konsentrasi pada elektronika industri dan sistem kendali.</p>
+        </div>
       </div>
     </div>
+  </section>
 
-    <div class="timeline-item">
-      <div class="timeline-content">
-        <h3>SMK Negeri 1 Natar Lampung Selatan - Teknik Elektronika Industri</h3>
-        <span class="edu-year">2013 - 2016</span>
+  <footer id="contact">
+    <div class="container">
+      <div class="bento-card contact-card" data-aos="fade-up">
+        <p><strong data-i18n="contact_title">Terima kasih sudah berkunjung.</strong></p>
+        <p data-i18n="contact_body">Jika Anda ingin berdiskusi lebih lanjut atau memiliki pertanyaan terkait layanan saya, silakan kirim pesan menggunakan formulir berikut. Saya akan merespons secepat mungkin secara profesional.</p>
+        <span class="contact-cta"><i class="fa-solid fa-paper-plane"></i> <span data-i18n="contact_cta">Formulir ini langsung mengarah ke email saya.</span></span>
+        <form class="contact-form" action="mailto:adzypurnomo@gmail.com" method="POST" enctype="text/plain">
+          <label class="contact-field">
+            <span data-i18n="contact_label_name">Nama</span>
+            <input type="text" name="name" placeholder="Nama kamu" required data-i18n-placeholder="contact_placeholder_name">
+          </label>
+          <label class="contact-field">
+            <span data-i18n="contact_label_email">Email</span>
+            <input type="email" name="email" placeholder="email@domain.com" required data-i18n-placeholder="contact_placeholder_email">
+          </label>
+          <label class="contact-field">
+            <span data-i18n="contact_label_subject">Subjek</span>
+            <input type="text" name="subject" placeholder="Judul pesan" required data-i18n-placeholder="contact_placeholder_subject">
+          </label>
+          <label class="contact-field">
+            <span data-i18n="contact_label_message">Pesan</span>
+            <textarea name="message" placeholder="Tulis pesan kamu di sini..." required data-i18n-placeholder="contact_placeholder_message"></textarea>
+          </label>
+          <button class="btn" type="submit" data-i18n="contact_btn">Kirim Email</button>
+        </form>
       </div>
-    </div>
-
-  </div>
-</section>
-
-  <!-- Footer -->
-  <footer>
-    <p>© 2025 Adzi Purnomo. All Rights Reserved.</p>
-    <div class="socials">
-      <a href="https://www.linkedin.com/in/adzipurnomo18/"><i class="fab fa-linkedin"></i></a>
-      <a href="https://github.com/Adzipurnomo18"><i class="fab fa-github"></i></a>
-      <a href="https://www.youtube.com/@adzp18"><i class="fab fa-youtube"></i></a>
+      <p data-i18n="footer_copy">@ 2025 Adzi Purnomo. All Rights Reserved.</p>
+      <div class="socials">
+        <a href="https://www.linkedin.com/in/adzipurnomo18/" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/Adzipurnomo18" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://www.youtube.com/@adzp18" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+      </div>
     </div>
   </footer>
 
-  <!-- Script AOS -->
+  <div id="zoomModal" class="zoom-modal" onclick="closeZoom()">
+    <span class="close" onclick="closeZoom()">&times;</span>
+    <div class="zoom-content">
+      <img id="zoomedImage" src="" alt="Zoomed">
+      <iframe id="zoomedVideo" src="" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <div id="modalPortfolio1" class="modal" onclick="closeModal('modalPortfolio1')">
+    <span class="close" onclick="closeModal('modalPortfolio1')">&times;</span>
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <img src="https://cdn.pixabay.com/photo/2025/09/16/04/31/service-9836993_1280.png" onclick="zoomImage(this.src)" alt="Portfolio 1">
+      <img src="https://cdn.pixabay.com/photo/2024/11/30/04/27/app-9234005_1280.png" onclick="zoomImage(this.src)" alt="Portfolio 2">
+      <img src="https://cdn.pixabay.com/photo/2024/11/30/05/00/database-9234032_1280.png" onclick="zoomImage(this.src)" alt="Portfolio 3">
+    </div>
+  </div>
+
+    <div id="modalPortfolio2" class="modal" onclick="closeModal('modalPortfolio2')">
+      <span class="close" onclick="closeModal('modalPortfolio2')">&times;</span>
+      <div class="modal-content" onclick="event.stopPropagation()">
+        <img src="https://cdn.pixabay.com/photo/2024/11/30/04/28/design-9234006_960_720.png" onclick="zoomImage(this.src)" alt="Design 1">
+        <img src="https://cdn.pixabay.com/photo/2025/09/16/02/40/figma-9836904_1280.png" onclick="zoomImage(this.src)" alt="Design 2">
+      </div>
+    </div>
+
+  <div id="modalPortfolio3" class="modal" onclick="closeModal('modalPortfolio3')">
+    <span class="close" onclick="closeModal('modalPortfolio3')">&times;</span>
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <img src="https://cdn.pixabay.com/photo/2024/11/30/04/23/web-9234002_1280.png" onclick="zoomImage(this.src)" alt="App 1">
+      <img src="https://cdn.pixabay.com/photo/2024/11/30/04/47/web-9234021_1280.png" onclick="zoomImage(this.src)" alt="App 2">
+      <img src="https://cdn.pixabay.com/photo/2024/11/30/04/46/app-9234020_1280.png" onclick="zoomImage(this.src)" alt="App 3">
+    </div>
+  </div>
+
+  <div id="modalAppsSuite" class="modal gallery-modal" onclick="closeModal('modalAppsSuite')">
+    <span class="close" onclick="closeModal('modalAppsSuite')">&times;</span>
+    <div class="modal-content gallery-content" onclick="event.stopPropagation()">
+      <div class="gallery-toolbar">
+        <div class="gallery-filters">
+          <button class="gallery-filter active" type="button" data-filter="all" data-i18n="gallery_filter_all">Semua</button>
+          <button class="gallery-filter" type="button" data-filter="web" data-i18n="gallery_filter_web">Web Apps</button>
+          <button class="gallery-filter" type="button" data-filter="service" data-i18n="gallery_filter_service">Service</button>
+          <button class="gallery-filter" type="button" data-filter="archive" data-i18n="gallery_filter_archive">Arsip</button>
+        </div>
+        <div class="gallery-count"><span data-i18n="gallery_count_label">Total</span>: <span id="galleryCount">0</span></div>
+      </div>
+      <div class="gallery-grid" id="appsSuiteGallery">
+        <img src="assets/projects/apps-adzi-web-1.png" onclick="zoomImage(this.src)" alt="Apps Adzi Web 1" data-category="web">
+        <img src="assets/projects/apps-adzi-web-2.png" onclick="zoomImage(this.src)" alt="Apps Adzi Web 2" data-category="web">
+        <img src="assets/projects/apps-adzi-web-3.png" onclick="zoomImage(this.src)" alt="Apps Adzi Web 3" data-category="web">
+        <img src="assets/projects/apps-adzi-web-4.png" onclick="zoomImage(this.src)" alt="Apps Adzi Web 4" data-category="web">
+        <img src="assets/projects/apps-adzi-web-5.png" onclick="zoomImage(this.src)" alt="Apps Adzi Web 5" data-category="web">
+        <img src="assets/projects/apps-adzi-web-6.png" onclick="zoomImage(this.src)" alt="Apps Adzi Web 6" data-category="web">
+        <img src="assets/projects/apps-elektron-1.png" onclick="zoomImage(this.src)" alt="Apps Elektron 1" data-category="service">
+        <img src="assets/projects/apps-elektron-2.png" onclick="zoomImage(this.src)" alt="Apps Elektron 2" data-category="service">
+        <img src="assets/projects/apps-elektron-3.png" onclick="zoomImage(this.src)" alt="Apps Elektron 3" data-category="service">
+        <img src="assets/projects/apps-elektron-4.png" onclick="zoomImage(this.src)" alt="Apps Elektron 4" data-category="service">
+        <img src="assets/projects/apps-elektron-5.png" onclick="zoomImage(this.src)" alt="Apps Elektron 5" data-category="service">
+        <img src="assets/projects/apps-service-1.png" onclick="zoomImage(this.src)" alt="Apps Service 1" data-category="service">
+        <img src="assets/projects/apps-service-2.png" onclick="zoomImage(this.src)" alt="Apps Service 2" data-category="service">
+        <img src="assets/projects/apps-service-3.png" onclick="zoomImage(this.src)" alt="Apps Service 3" data-category="service">
+        <img src="assets/projects/arsip-unh-1.png" onclick="zoomImage(this.src)" alt="Arsip UNH 1" data-category="archive">
+        <img src="assets/projects/arsip-unh-2.png" onclick="zoomImage(this.src)" alt="Arsip UNH 2" data-category="archive">
+        <img src="assets/projects/arsip-unh-3.png" onclick="zoomImage(this.src)" alt="Arsip UNH 3" data-category="archive">
+        <img src="assets/projects/arsip-unh-4.png" onclick="zoomImage(this.src)" alt="Arsip UNH 4" data-category="archive">
+        <img src="assets/projects/arsip-unh-5.png" onclick="zoomImage(this.src)" alt="Arsip UNH 5" data-category="archive">
+      </div>
+    </div>
+  </div>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <script>
+    var translations = {
+      id: {
+        nav_home: "Home",
+        nav_about: "About",
+        nav_experience: "Experience",
+        nav_projects: "Projects",
+        nav_skills: "Skills",
+        nav_education: "Education",
+        nav_contact: "Contact",
+        hero_eyebrow: "Future CV",
+        hero_subtitle: "Technician | Web Developer | IT Staff",
+        hero_chip_1: "IoT Builder",
+        hero_chip_2: "Web Systems",
+        hero_chip_3: "Hardware + Software",
+        hero_cta_primary: "Explore My Work",
+        hero_cta_secondary: "Contact Me",
+        hero_profile_desc: "Berbasis di Indonesia. Terbiasa menangani produk elektronik, sistem IoT, dan aplikasi berbasis web.",
+        hero_focus_label: "Focus",
+        hero_focus_value: "IoT, Web Apps, Automation",
+        hero_stack_label: "Stack",
+        hero_stack_value: "JS, Python, PHP, MySQL",
+        about_title: "About Me",
+        about_subtitle: "Profil singkat dengan fokus pada kemampuan teknis, analisis, dan solusi digital modern.",
+        about_body: "Lulusan S1 Teknik Informatika dengan IPK 3.78, memiliki latar belakang sebagai teknisi elektronik konsumen di PT SITCOMTARA sejak 2017. Terbiasa melakukan troubleshooting perangkat, analisis teknis, dan edukasi pelanggan secara profesional. Berpengalaman mengembangkan solusi berbasis teknologi seperti IoT dan pemrograman sistem berbasis web.",
+        about_item_1: "Analisis perangkat dan otomasi sistem.",
+        about_item_2: "Pengembangan web responsif dan interaktif.",
+        about_item_3: "Integrasi IoT untuk monitoring real time.",
+        about_item_4: "Edukasi teknis dan komunikasi dengan klien.",
+        exp_title: "Experience",
+        exp_subtitle: "Teknisi CE (Consumer Electronics) di PT SITCOMTARA (2017 - 2025)",
+        exp_role_title: "Role Impact",
+        exp_role_1: "Diagnosa dan perbaikan 500+ perangkat dengan keberhasilan 98% di kunjungan pertama.",
+        exp_role_2: "Instalasi dan edukasi teknis untuk 200+ pelanggan.",
+        exp_role_3: "Efisiensi diagnosa awal naik hingga 90% lewat analisis pola kerusakan.",
+        exp_service_title: "Service Excellence",
+        exp_service_1: "Kolaborasi dengan tim service untuk menjaga standar layanan Samsung.",
+        exp_service_2: "Dokumentasi kasus dan rekomendasi perawatan preventif.",
+        exp_service_3: "Penguatan KPI layanan melalui troubleshooting berbasis data.",
+        projects_title: "Projects",
+        projects_subtitle: "Beberapa proyek unggulan dengan fokus pada pengalaman visual modern.",
+        project_suite_title: "Apps Suite Gallery",
+        project_suite_body: "Koleksi tampilan aplikasi yang pernah saya bangun untuk kebutuhan web, service center, dan sistem arsip. Klik untuk melihat seluruh screenshot secara lengkap.",
+        project_suite_tag_1: "Web Apps",
+        project_suite_tag_2: "Service System",
+        project_suite_tag_3: "Archive Platform",
+        gallery_filter_all: "Semua",
+        gallery_filter_web: "Web Apps",
+        gallery_filter_service: "Service",
+        gallery_filter_archive: "Arsip",
+        gallery_count_label: "Total",
+        project_1_body: "Layanan pengembangan website dari desain hingga implementasi. Website responsif dan interaktif menggunakan HTML, CSS, JavaScript, dan PHP.",
+        project_2_body: "Desain logo, banner, dan visual media sosial dengan Adobe Photoshop, Figma, dan Canva.",
+        project_3_body: "Aplikasi mobile untuk manajemen tugas menggunakan Flutter dan Firebase sebagai backend.",
+        project_4_body: "Proyek video editing untuk media sosial dan presentasi dengan efek visual dan transisi modern.",
+        project_btn_view: "Lihat Screenshot",
+        project_btn_gallery: "Lihat Gallery",
+        project_btn_video: "Lihat Video",
+        skills_title: "Skills",
+        skills_subtitle: "Teknologi yang dikuasai untuk membangun solusi digital end-to-end.",
+        edu_title: "Education",
+        edu_subtitle: "Perjalanan akademik dan fokus pembelajaran utama.",
+        edu_gpa_label: "IPK:",
+        edu_focus_1: "Fokus: Pengembangan Perangkat Lunak, Analisis Data, IoT, Sistem Informasi.",
+        edu_focus_2: "Skripsi: Prototype Sistem Smart Garden Berbasis IoT.",
+        edu_focus_3: "Konsentrasi pada elektronika industri dan sistem kendali.",
+        contact_title: "Terima kasih sudah berkunjung.",
+        contact_body: "Jika Anda ingin berdiskusi lebih lanjut atau memiliki pertanyaan terkait layanan saya, silakan kirim pesan menggunakan formulir berikut. Saya akan merespons secepat mungkin secara profesional.",
+        contact_cta: "Formulir ini langsung mengarah ke email saya.",
+        contact_label_name: "Nama",
+        contact_label_email: "Email",
+        contact_label_subject: "Subjek",
+        contact_label_message: "Pesan",
+        contact_placeholder_name: "Nama kamu",
+        contact_placeholder_email: "email@domain.com",
+        contact_placeholder_subject: "Judul pesan",
+        contact_placeholder_message: "Tulis pesan kamu di sini...",
+        contact_btn: "Kirim Email",
+        footer_copy: "@ 2025 Adzi Purnomo. All Rights Reserved."
+      },
+      en: {
+        nav_home: "Home",
+        nav_about: "About",
+        nav_experience: "Experience",
+        nav_projects: "Projects",
+        nav_skills: "Skills",
+        nav_education: "Education",
+        nav_contact: "Contact",
+        hero_eyebrow: "Future CV",
+        hero_subtitle: "Technician | Web Developer | IT Staff",
+        hero_chip_1: "IoT Builder",
+        hero_chip_2: "Web Systems",
+        hero_chip_3: "Hardware + Software",
+        hero_cta_primary: "Explore My Work",
+        hero_cta_secondary: "Contact Me",
+        hero_profile_desc: "Based in Indonesia. Experienced in handling electronics, IoT systems, and web-based applications.",
+        hero_focus_label: "Focus",
+        hero_focus_value: "IoT, Web Apps, Automation",
+        hero_stack_label: "Stack",
+        hero_stack_value: "JS, Python, PHP, MySQL",
+        about_title: "About Me",
+        about_subtitle: "A concise profile focused on technical capability, analysis, and modern digital solutions.",
+        about_body: "Computer Science graduate (GPA 3.78) with a background as a consumer electronics technician at PT SITCOMTARA since 2017. Skilled in troubleshooting, technical analysis, and professional customer education. Experienced in building technology solutions such as IoT and web-based systems.",
+        about_item_1: "Device analysis and system automation.",
+        about_item_2: "Responsive and interactive web development.",
+        about_item_3: "IoT integration for real-time monitoring.",
+        about_item_4: "Technical education and client communication.",
+        exp_title: "Experience",
+        exp_subtitle: "CE Technician (Consumer Electronics) at PT SITCOMTARA (2017 - 2025)",
+        exp_role_title: "Role Impact",
+        exp_role_1: "Diagnosed and repaired 500+ devices with a 98% first-visit success rate.",
+        exp_role_2: "Installation and technical education for 200+ customers.",
+        exp_role_3: "Boosted initial diagnosis efficiency by up to 90% through fault pattern analysis.",
+        exp_service_title: "Service Excellence",
+        exp_service_1: "Collaborated with service teams to maintain Samsung service standards.",
+        exp_service_2: "Documented cases and delivered preventive maintenance recommendations.",
+        exp_service_3: "Strengthened service KPIs through data-driven troubleshooting.",
+        projects_title: "Projects",
+        projects_subtitle: "Selected work with a focus on modern visual experience.",
+        project_suite_title: "Apps Suite Gallery",
+        project_suite_body: "A collection of app interfaces I built for web, service center, and archival systems. Click to view the complete screenshot gallery.",
+        project_suite_tag_1: "Web Apps",
+        project_suite_tag_2: "Service System",
+        project_suite_tag_3: "Archive Platform",
+        gallery_filter_all: "All",
+        gallery_filter_web: "Web Apps",
+        gallery_filter_service: "Service",
+        gallery_filter_archive: "Archive",
+        gallery_count_label: "Total",
+        project_1_body: "Website development service from design to implementation. Responsive and interactive websites using HTML, CSS, JavaScript, and PHP.",
+        project_2_body: "Logo, banner, and social media visual design using Adobe Photoshop, Figma, and Canva.",
+        project_3_body: "A mobile app for task management using Flutter and Firebase as the backend.",
+        project_4_body: "Video editing projects for social media and presentations with modern visual transitions.",
+        project_btn_view: "View Screenshots",
+        project_btn_gallery: "View Gallery",
+        project_btn_video: "Watch Video",
+        skills_title: "Skills",
+        skills_subtitle: "Technologies used to build end-to-end digital solutions.",
+        edu_title: "Education",
+        edu_subtitle: "Academic journey and primary focus areas.",
+        edu_gpa_label: "GPA:",
+        edu_focus_1: "Focus: Software Development, Data Analysis, IoT, Information Systems.",
+        edu_focus_2: "Thesis: IoT-based Smart Garden System Prototype.",
+        edu_focus_3: "Concentration in industrial electronics and control systems.",
+        contact_title: "Thank you for visiting.",
+        contact_body: "If you would like to discuss further or have any questions about my services, please send a message using the form below. I will respond as promptly and professionally as possible.",
+        contact_cta: "This form sends your message directly to my email.",
+        contact_label_name: "Name",
+        contact_label_email: "Email",
+        contact_label_subject: "Subject",
+        contact_label_message: "Message",
+        contact_placeholder_name: "Your name",
+        contact_placeholder_email: "email@domain.com",
+        contact_placeholder_subject: "Message subject",
+        contact_placeholder_message: "Write your message here...",
+        contact_btn: "Send Email",
+        footer_copy: "Ac 2025 Adzi Purnomo. All Rights Reserved."
+      }
+    };
+
+    function applyLanguage(lang) {
+      var textNodes = document.querySelectorAll("[data-i18n]");
+      textNodes.forEach(function(node) {
+        var key = node.getAttribute("data-i18n");
+        if (translations[lang] && translations[lang][key]) {
+          node.textContent = translations[lang][key];
+        }
+      });
+
+      var placeholders = document.querySelectorAll("[data-i18n-placeholder]");
+      placeholders.forEach(function(node) {
+        var key = node.getAttribute("data-i18n-placeholder");
+        if (translations[lang] && translations[lang][key]) {
+          node.setAttribute("placeholder", translations[lang][key]);
+        }
+      });
+
+      var toggle = document.getElementById("langToggle");
+      if (toggle) {
+        toggle.textContent = lang === "id" ? "EN" : "ID";
+      }
+      document.documentElement.setAttribute("lang", lang);
+      try {
+        localStorage.setItem("cvLang", lang);
+      } catch (e) {}
+    }
+
+    function animateCount(el) {
+      var target = parseFloat(el.getAttribute("data-target") || "0");
+      var suffix = el.getAttribute("data-suffix") || "";
+      var duration = 1200;
+      var start = 0;
+      var startTime = null;
+
+      function tick(timestamp) {
+        if (!startTime) {
+          startTime = timestamp;
+        }
+        var progress = Math.min((timestamp - startTime) / duration, 1);
+        var value = Math.floor(start + (target - start) * progress);
+        el.textContent = String(value) + suffix;
+        if (progress < 1) {
+          requestAnimationFrame(tick);
+        } else {
+          el.textContent = String(target) + suffix;
+        }
+      }
+
+      requestAnimationFrame(tick);
+    }
+
+    function initCounters() {
+      var counters = document.querySelectorAll(".count-up");
+      if (!counters.length) {
+        return;
+      }
+
+      var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduceMotion) {
+        counters.forEach(function(counter) {
+          var suffix = counter.getAttribute("data-suffix") || "";
+          var target = counter.getAttribute("data-target") || "0";
+          counter.textContent = String(target) + suffix;
+        });
+        return;
+      }
+
+      var observer = new IntersectionObserver(function(entries, obs) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            animateCount(entry.target);
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.6 });
+
+      counters.forEach(function(counter) {
+        observer.observe(counter);
+      });
+    }
+
+    function initGalleryFilters() {
+      var gallery = document.getElementById("appsSuiteGallery");
+      var countEl = document.getElementById("galleryCount");
+      var filters = document.querySelectorAll(".gallery-filter");
+      if (!gallery || !filters.length) {
+        return;
+      }
+
+      var items = Array.prototype.slice.call(gallery.querySelectorAll("img"));
+
+      function updateCount() {
+        if (!countEl) {
+          return;
+        }
+        var visible = items.filter(function(item) {
+          return item.style.display !== "none";
+        }).length;
+        countEl.textContent = String(visible);
+      }
+
+      function applyFilter(filter) {
+        items.forEach(function(item) {
+          var category = item.getAttribute("data-category") || "";
+          if (filter === "all" || filter === category) {
+            item.style.display = "block";
+          } else {
+            item.style.display = "none";
+          }
+        });
+        updateCount();
+      }
+
+      filters.forEach(function(button) {
+        button.addEventListener("click", function() {
+          filters.forEach(function(btn) { btn.classList.remove("active"); });
+          button.classList.add("active");
+          applyFilter(button.getAttribute("data-filter") || "all");
+        });
+      });
+
+      applyFilter("all");
+    }
+
+    function openModal(id) {
+      var modal = document.getElementById(id);
+      if (modal) {
+        modal.style.display = "flex";
+      }
+    }
+
+    function closeModal(id) {
+      var modal = document.getElementById(id);
+      if (modal) {
+        modal.style.display = "none";
+      }
+    }
+
+    function zoomImage(src) {
+      var zoomModal = document.getElementById("zoomModal");
+      var zoomedImage = document.getElementById("zoomedImage");
+      var zoomedVideo = document.getElementById("zoomedVideo");
+      if (!zoomModal || !zoomedImage || !zoomedVideo) {
+        return;
+      }
+      zoomedVideo.style.display = "none";
+      zoomedImage.style.display = "block";
+      zoomedImage.src = src;
+      zoomModal.style.display = "flex";
+    }
+
+    function zoomVideo(youtubeUrl) {
+      var zoomModal = document.getElementById("zoomModal");
+      var zoomedImage = document.getElementById("zoomedImage");
+      var zoomedVideo = document.getElementById("zoomedVideo");
+      if (!zoomModal || !zoomedImage || !zoomedVideo) {
+        return;
+      }
+      var embedUrl = youtubeUrl.replace("youtu.be/", "www.youtube.com/embed/").split("?")[0];
+      zoomedImage.style.display = "none";
+      zoomedVideo.style.display = "block";
+      zoomedVideo.src = embedUrl;
+      zoomModal.style.display = "flex";
+    }
+
+    function closeZoom() {
+      var zoomModal = document.getElementById("zoomModal");
+      var zoomedImage = document.getElementById("zoomedImage");
+      var zoomedVideo = document.getElementById("zoomedVideo");
+      if (zoomModal) {
+        zoomModal.style.display = "none";
+      }
+      if (zoomedImage) {
+        zoomedImage.src = "";
+      }
+      if (zoomedVideo) {
+        zoomedVideo.src = "";
+      }
+    }
+
     AOS.init({
-      duration: 1000,
+      duration: 900,
       once: true
     });
+
+    var lastScrollTop = 0;
+    var header = document.querySelector("header");
+    var langToggle = document.getElementById("langToggle");
+    var themeToggle = document.getElementById("themeToggle");
+    var savedLang = "id";
+
+    try {
+      savedLang = localStorage.getItem("cvLang") || "id";
+    } catch (e) {}
+    applyLanguage(savedLang);
+
+    function applyTheme(theme) {
+      document.body.setAttribute("data-theme", theme);
+      if (themeToggle) {
+        themeToggle.textContent = theme === "dark" ? "LIGHT" : "DARK";
+      }
+      try {
+        localStorage.setItem("cvTheme", theme);
+      } catch (e) {}
+    }
+
+    var savedTheme = "dark";
+    try {
+      savedTheme = localStorage.getItem("cvTheme") || "dark";
+    } catch (e) {}
+    applyTheme(savedTheme);
+
+    if (langToggle) {
+      langToggle.addEventListener("click", function() {
+        var current = document.documentElement.getAttribute("lang") || "id";
+        var next = current === "id" ? "en" : "id";
+        applyLanguage(next);
+      });
+    }
+
+    if (themeToggle) {
+      themeToggle.addEventListener("click", function() {
+        var currentTheme = document.body.getAttribute("data-theme") || "dark";
+        var nextTheme = currentTheme === "dark" ? "light" : "dark";
+        applyTheme(nextTheme);
+      });
+    }
+
+    initCounters();
+    initGalleryFilters();
+
+    window.addEventListener("scroll", function() {
+      if (!header) {
+        return;
+      }
+      var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      var headerHeight = header.offsetHeight || 80;
+      if (scrollTop > lastScrollTop) {
+        header.style.top = "-" + headerHeight + "px";
+      } else {
+        header.style.top = "0";
+      }
+      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+    });
   </script>
-  <script>
-let lastScrollTop = 0;
-const header = document.querySelector('header');
-let headerHeight = header ? header.offsetHeight : 80;
-
-window.addEventListener('scroll', function() {
-  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-  headerHeight = header.offsetHeight;
-
-  if (scrollTop > lastScrollTop) {
-    header.style.top = `-${headerHeight}px`;
-  } else {
-    header.style.top = '0';
-  }
-  lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // Hindari nilai negatif
-});
-
-window.addEventListener('resize', function() {
-  headerHeight = header.offsetHeight;
-});
-  </script>
-
 </body>
 </html>
